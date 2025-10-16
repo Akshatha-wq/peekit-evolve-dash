@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TrendingUp, Users, Heart, MessageCircle, Share2, DollarSign } from "lucide-react";
+import { TrendingUp, Users, Heart, MessageCircle, Share2, DollarSign, Star, Target } from "lucide-react";
 
 const keyMetrics = [
   { label: "Avg Engagement Rate", value: "4.8%", icon: TrendingUp },
@@ -106,74 +106,74 @@ export const InfluencerEngagement = () => {
         </Select>
       </div>
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {keyMetrics.map((metric) => (
-          <Card key={metric.label} className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <metric.icon className="h-4 w-4 text-primary" />
-              <p className="text-xs text-muted-foreground">{metric.label}</p>
-            </div>
-            <p className="text-2xl font-bold text-foreground">{metric.value}</p>
-          </Card>
-        ))}
-      </div>
-
-      {/* Top Performing Content */}
+      {/* Key Influencers & Complementary Keywords */}
       <Card className="bg-card/50 border-border/50 p-6">
-        <h4 className="text-lg font-semibold mb-4 text-foreground">Top Performing Content</h4>
-        <div className="space-y-3">
-          {topContent.map((content, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">{content.title}</p>
-                <p className="text-xs text-muted-foreground">{content.platform} • {content.views} views</p>
+        <h4 className="text-xl font-bold text-foreground mb-6">Key Influencers & Complementary Keywords</h4>
+        
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Top Influencers */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Star className="h-5 w-5 text-primary" />
+              <h5 className="text-lg font-semibold text-foreground">Top Influencers</h5>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                @TechGuru
               </div>
-              <div className="flex items-center gap-2">
-                <content.metric.icon className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">{content.metric.value}</span>
+              <div className="p-6 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                @StyleInfluencer
+              </div>
+              <div className="p-6 rounded-lg bg-gradient-to-br from-cyan-400 to-cyan-600 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                @LifestyleVlogger
+              </div>
+              <div className="p-6 rounded-lg bg-gradient-to-br from-green-400 to-green-600 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                @BeautyExpert
+              </div>
+            </div>
+          </div>
+
+          {/* Complementary Keywords */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Target className="h-5 w-5 text-primary" />
+              <h5 className="text-lg font-semibold text-foreground">Complementary Keywords</h5>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="col-span-2 p-6 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                BCAA Supplements
+              </div>
+              <div className="p-6 rounded-lg bg-gradient-to-br from-pink-500 to-rose-600 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                Amino Acids
+              </div>
+              <div className="p-6 rounded-lg bg-gradient-to-br from-green-400 to-emerald-600 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                Recovery Tips
+              </div>
+              <div className="col-span-2 p-6 rounded-lg bg-gradient-to-br from-pink-400 to-pink-500 text-white font-semibold text-center flex items-center justify-center min-h-[100px]">
+                Workout Nutrition
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <Card className="bg-card/50 border-border/50 p-6">
+        <h4 className="text-lg font-semibold mb-4 text-foreground">Brand Discoveries</h4>
+        <div className="space-y-3">
+          {brandDiscoveries.map((brand) => (
+            <div key={brand.brand} className="p-3 bg-muted/30 rounded-lg">
+              <p className="text-sm font-medium text-foreground mb-1">{brand.brand}</p>
+              <p className="text-xs text-muted-foreground mb-2">{brand.description}</p>
+              <div className="flex items-center justify-between text-xs">
+                <Badge variant="outline">{brand.platform}</Badge>
+                <span className="text-muted-foreground">{brand.views} views</span>
               </div>
             </div>
           ))}
         </div>
       </Card>
-
-      {/* Key Influencers and Brand Discoveries */}
-      <div className="grid lg:grid-cols-2 gap-6">
-        <Card className="bg-card/50 border-border/50 p-6">
-          <h4 className="text-lg font-semibold mb-4 text-foreground">Key Influencers on {selectedPlatform}</h4>
-          <div className="space-y-3">
-            {influencersByPlatform[selectedPlatform].map((influencer) => (
-              <div key={influencer.name} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                <div>
-                  <p className="text-sm font-medium text-foreground">{influencer.name}</p>
-                  <p className="text-xs text-muted-foreground">{influencer.followers} followers</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-muted-foreground">Engagement: {influencer.engagement}</p>
-                  <p className="text-xs font-semibold text-primary">ROI: {influencer.roi}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        <Card className="bg-card/50 border-border/50 p-6">
-          <h4 className="text-lg font-semibold mb-4 text-foreground">Brand Discoveries</h4>
-          <div className="space-y-3">
-            {brandDiscoveries.map((brand) => (
-              <div key={brand.brand} className="p-3 bg-muted/30 rounded-lg">
-                <p className="text-sm font-medium text-foreground mb-1">{brand.brand}</p>
-                <p className="text-xs text-muted-foreground mb-2">{brand.description}</p>
-                <div className="flex items-center justify-between text-xs">
-                  <Badge variant="outline">{brand.platform}</Badge>
-                  <span className="text-muted-foreground">{brand.views} views</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      </div>
     </div>
   );
 };
