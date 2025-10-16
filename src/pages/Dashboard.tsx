@@ -15,7 +15,7 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       <DashboardHeader />
       
-      <main id="dashboard-content" className="container mx-auto px-6 py-8 space-y-8">
+      <main className="container mx-auto px-6 py-8 space-y-8">
         {/* Trend Overview Section */}
         <section>
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
