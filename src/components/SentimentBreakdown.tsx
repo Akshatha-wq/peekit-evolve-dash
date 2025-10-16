@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { ThumbsUp, ThumbsDown, Check, X } from "lucide-react";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const sentimentData = [
   { name: "Positive", value: 72, color: "#3B82F6" },
@@ -23,6 +24,22 @@ const negativePoints = [
   "Blades dull quickly",
   "Not waterproof",
 ];
+
+// New metrics data
+const sentimentDelta = 12.5; // % change over time
+const sentimentScore = 7.8; // weighted average (0-10 scale)
+const shareOfVoice = 34.2; // % of total market mentions
+const sentimentDifferentialIndex = { ourBrand: 7.8, competitor: 6.2 }; // comparison
+
+const topKeywords = [
+  { keyword: "Easy to use", sentiment: "positive", frequency: 245 },
+  { keyword: "Battery life", sentiment: "negative", frequency: 156 },
+  { keyword: "Rechargeable", sentiment: "positive", frequency: 198 },
+  { keyword: "Noisy", sentiment: "negative", frequency: 89 },
+  { keyword: "Travel-friendly", sentiment: "positive", frequency: 167 },
+];
+
+const responseTimeToNegativity = 4.2; // average hours
 
 export const SentimentBreakdown = () => {
   return (
@@ -102,6 +119,131 @@ export const SentimentBreakdown = () => {
             </div>
           </Card>
         </div>
+      </Card>
+
+      {/* Advanced Sentiment Metrics */}
+      <Card className="bg-gradient-card border-border/50 p-6">
+        <h3 className="text-xl font-bold text-foreground mb-6">Advanced Sentiment Metrics</h3>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          {/* Sentiment Delta */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-rising-trend" />
+                <h4 className="font-semibold text-foreground">Sentiment Delta</h4>
+              </div>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-rising-trend">+{sentimentDelta}%</span>
+              <span className="text-sm text-muted-foreground">vs. last period</span>
+            </div>
+          </Card>
+
+          {/* Sentiment Score */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Scale className="h-5 w-5 text-primary" />
+                <h4 className="font-semibold text-foreground">Sentiment Score</h4>
+              </div>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-primary">{sentimentScore}</span>
+              <span className="text-sm text-muted-foreground">/ 10</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">Weighted average</p>
+          </Card>
+
+          {/* Share of Voice */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-accent" />
+                <h4 className="font-semibold text-foreground">Share of Voice</h4>
+              </div>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-accent">{shareOfVoice}%</span>
+              <span className="text-sm text-muted-foreground">market share</span>
+            </div>
+          </Card>
+
+          {/* Sentiment Differential Index */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <GitCompare className="h-5 w-5 text-secondary" />
+                <h4 className="font-semibold text-foreground">Sentiment Differential</h4>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Our Brand</span>
+                <span className="text-lg font-bold text-rising-trend">{sentimentDifferentialIndex.ourBrand}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Competitor</span>
+                <span className="text-lg font-bold text-muted-foreground">{sentimentDifferentialIndex.competitor}</span>
+              </div>
+              <div className="pt-2 border-t border-border/50">
+                <span className="text-xs font-semibold text-rising-trend">
+                  +{(sentimentDifferentialIndex.ourBrand - sentimentDifferentialIndex.competitor).toFixed(1)} advantage
+                </span>
+              </div>
+            </div>
+          </Card>
+
+          {/* Response Time to Negativity */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-warning" />
+                <h4 className="font-semibold text-foreground">Response Time</h4>
+              </div>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold text-foreground">{responseTimeToNegativity}</span>
+              <span className="text-sm text-muted-foreground">hours avg.</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">To negative mentions</p>
+          </Card>
+        </div>
+
+        {/* Top Keywords/Topics Frequency */}
+        <Card className="bg-card/50 border-border/50 p-4">
+          <div className="flex items-center gap-2 mb-4">
+            <Hash className="h-5 w-5 text-primary" />
+            <h4 className="font-semibold text-foreground">Top Keywords/Topics Frequency</h4>
+          </div>
+          <div className="space-y-3">
+            {topKeywords.map((item, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Badge 
+                    variant={item.sentiment === "positive" ? "default" : "destructive"}
+                    className={item.sentiment === "positive" 
+                      ? "bg-rising-trend/20 text-rising-trend border-rising-trend/30" 
+                      : "bg-destructive/20 text-destructive border-destructive/30"
+                    }
+                  >
+                    {item.sentiment}
+                  </Badge>
+                  <span className="text-sm font-medium text-foreground">{item.keyword}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-32 bg-muted rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full ${item.sentiment === "positive" ? "bg-rising-trend" : "bg-destructive"}`}
+                      style={{ width: `${(item.frequency / 250) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-sm font-bold text-foreground min-w-[3rem] text-right">{item.frequency}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
       </Card>
     </div>
   );
