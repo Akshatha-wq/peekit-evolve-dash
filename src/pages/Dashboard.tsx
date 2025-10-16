@@ -13,19 +13,17 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
-const SectionHeader = ({ id, title, icon: Icon, isOpen, onToggle }: { 
+const SectionHeader = ({ id, title, icon: Icon, isOpen }: { 
   id: string; 
   title: string; 
   icon?: any;
   isOpen: boolean;
-  onToggle: () => void;
 }) => (
-  <div id={id} className="scroll-mt-24 mb-6">
-    <CollapsibleTrigger asChild>
+  <CollapsibleTrigger asChild>
+    <div id={id} className="scroll-mt-24 mb-6 w-full">
       <Button
         variant="ghost"
-        className="w-full flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20 hover:bg-transparent p-0 h-auto"
-        onClick={onToggle}
+        className="w-full flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20 hover:bg-transparent p-0 h-auto rounded-none"
       >
         <div className="flex items-center gap-3">
           {Icon && <Icon className="h-6 w-6 text-primary" />}
@@ -34,13 +32,13 @@ const SectionHeader = ({ id, title, icon: Icon, isOpen, onToggle }: {
           </h2>
         </div>
         {isOpen ? (
-          <ChevronUp className="h-5 w-5 text-muted-foreground" />
+          <ChevronUp className="h-5 w-5 text-muted-foreground transition-transform" />
         ) : (
-          <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform" />
         )}
       </Button>
-    </CollapsibleTrigger>
-  </div>
+    </div>
+  </CollapsibleTrigger>
 );
 
 const Dashboard = () => {
@@ -73,7 +71,6 @@ const Dashboard = () => {
               title="Trend Overview" 
               icon={TrendingUp}
               isOpen={openSections.trendOverview}
-              onToggle={() => toggleSection('trendOverview')}
             />
             
             <CollapsibleContent className="space-y-8">
@@ -154,7 +151,6 @@ const Dashboard = () => {
               title="Hot, Rising & Cold Trends" 
               icon={Flame}
               isOpen={openSections.trendsTable}
-              onToggle={() => toggleSection('trendsTable')}
             />
             <CollapsibleContent>
               <TrendsTable />
@@ -173,7 +169,6 @@ const Dashboard = () => {
               title="Source Mapping" 
               icon={MapPin}
               isOpen={openSections.sourceMapping}
-              onToggle={() => toggleSection('sourceMapping')}
             />
             <CollapsibleContent>
               <SourceMapping />
@@ -192,7 +187,6 @@ const Dashboard = () => {
               title="Whitespace Opportunities" 
               icon={Target}
               isOpen={openSections.whitespaceOpportunities}
-              onToggle={() => toggleSection('whitespaceOpportunities')}
             />
             <CollapsibleContent>
               <WhitespaceOpportunities />
@@ -211,7 +205,6 @@ const Dashboard = () => {
               title="Sentiment Breakdown" 
               icon={Sparkles}
               isOpen={openSections.sentimentBreakdown}
-              onToggle={() => toggleSection('sentimentBreakdown')}
             />
             <CollapsibleContent>
               <SentimentBreakdown />
@@ -230,7 +223,6 @@ const Dashboard = () => {
               title="Overall Summary" 
               icon={Sparkles}
               isOpen={openSections.overallSummary}
-              onToggle={() => toggleSection('overallSummary')}
             />
             <CollapsibleContent>
               <OverallSummary />
