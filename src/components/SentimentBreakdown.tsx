@@ -33,7 +33,7 @@ const sentimentDifferentialIndex = { ourBrand: 7.8, competitor: 6.2 }; // compar
 const responseTimeToNegativity = 4.2; // average hours
 
 // Geography & Customer Segmentation data
-const regionalSentimentData = [
+const allRegionalSentimentData = [
   { region: "Maharashtra", sentimentScore: 8.2, volume: 2845 },
   { region: "Karnataka", sentimentScore: 7.9, volume: 2134 },
   { region: "Delhi", sentimentScore: 7.5, volume: 1923 },
@@ -47,6 +47,11 @@ const regionalSentimentData = [
   { region: "Telangana", sentimentScore: 7.7, volume: 1345 },
   { region: "Punjab", sentimentScore: 7.3, volume: 876 },
 ];
+
+// Get top 8 regions sorted by sentiment score (highest to lowest)
+const regionalSentimentData = [...allRegionalSentimentData]
+  .sort((a, b) => b.sentimentScore - a.sentimentScore)
+  .slice(0, 8);
 
 // Function to get color based on sentiment score
 const getSentimentColor = (score: number) => {
@@ -275,15 +280,35 @@ export const SentimentBreakdown = () => {
         <div className="grid lg:grid-cols-2 gap-6 mb-6">
           {/* Regional Sentiment Index (RSI) */}
           <Card className="bg-card/50 border-border/50 p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <MapPin className="h-5 w-5 text-primary" />
-              <h4 className="text-lg font-bold text-foreground">Regional Sentiment Index</h4>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-primary" />
+                <h4 className="text-lg font-bold text-foreground">Regional Sentiment Index</h4>
+              </div>
+              <div className="text-xs text-muted-foreground">Top 8 Regions</div>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={regionalSentimentData} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis type="number" domain={[0, 10]} stroke="hsl(var(--muted-foreground))" />
-                <YAxis type="category" dataKey="region" width={100} stroke="hsl(var(--muted-foreground))" />
+            <ResponsiveContainer width="100%" height={360}>
+              <BarChart 
+                data={regionalSentimentData} 
+                layout="horizontal" 
+                margin={{ top: 10, right: 30, left: 0, bottom: 60 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
+                <XAxis 
+                  dataKey="region" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  interval={0}
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis 
+                  domain={[0, 10]} 
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                  label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft', style: { fill: 'hsl(var(--muted-foreground))' } }}
+                />
                 <Tooltip 
                   contentStyle={{ 
                     backgroundColor: "hsl(var(--popover))", 
@@ -291,27 +316,73 @@ export const SentimentBreakdown = () => {
                     borderRadius: "0.5rem",
                     color: "hsl(var(--foreground))"
                   }}
+                  formatter={(value: number, name: string, props: any) => [
+                    <>
+                      <div className="font-semibold">Score: {value.toFixed(1)}/10</div>
+                      <div className="text-xs text-muted-foreground">Volume: {props.payload.volume.toLocaleString()}</div>
+                    </>,
+                    ''
+                  ]}
+                  labelFormatter={(label) => label}
                 />
-                <Bar dataKey="sentimentScore" fill="#3B82F6" radius={[0, 4, 4, 0]}>
+                <Bar 
+                  dataKey="sentimentScore" 
+                  radius={[4, 4, 0, 0]}
+                  maxBarSize={60}
+                >
                   {regionalSentimentData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={getSentimentColor(entry.sentimentScore)} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
+            
+            {/* Color Legend */}
+            <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-border/50">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#10B981]"></div>
+                <span className="text-xs text-muted-foreground">High (7.5+)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#F59E0B]"></div>
+                <span className="text-xs text-muted-foreground">Medium (6.5-7.4)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#EF4444]"></div>
+                <span className="text-xs text-muted-foreground">Low (&lt;6.5)</span>
+              </div>
+            </div>
           </Card>
 
           {/* Volume by Geography */}
           <Card className="bg-card/50 border-border/50 p-6">
-            <div className="flex items-center gap-2 mb-4">
-              <Hash className="h-5 w-5 text-accent" />
-              <h4 className="text-lg font-bold text-foreground">Volume by Geography</h4>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Hash className="h-5 w-5 text-accent" />
+                <h4 className="text-lg font-bold text-foreground">Volume by Geography</h4>
+              </div>
+              <div className="text-xs text-muted-foreground">Top 8 Regions</div>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={regionalSentimentData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="region" angle={-45} textAnchor="end" height={100} stroke="hsl(var(--muted-foreground))" />
-                <YAxis stroke="hsl(var(--muted-foreground))" />
+            <ResponsiveContainer width="100%" height={360}>
+              <BarChart 
+                data={regionalSentimentData}
+                margin={{ top: 10, right: 30, left: 0, bottom: 60 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
+                <XAxis 
+                  dataKey="region" 
+                  angle={-45} 
+                  textAnchor="end" 
+                  height={100}
+                  interval={0}
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis 
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                  label={{ value: 'Mentions Volume', angle: -90, position: 'insideLeft', style: { fill: 'hsl(var(--muted-foreground))' } }}
+                />
                 <Tooltip 
                   contentStyle={{ 
                     backgroundColor: "hsl(var(--popover))", 
@@ -319,8 +390,19 @@ export const SentimentBreakdown = () => {
                     borderRadius: "0.5rem",
                     color: "hsl(var(--foreground))"
                   }}
+                  formatter={(value: number, name: string, props: any) => [
+                    <>
+                      <div className="font-semibold">Volume: {value.toLocaleString()}</div>
+                      <div className="text-xs text-muted-foreground">Score: {props.payload.sentimentScore.toFixed(1)}/10</div>
+                    </>,
+                    ''
+                  ]}
                 />
-                <Bar dataKey="volume" fill="#10B981" radius={[4, 4, 0, 0]}>
+                <Bar 
+                  dataKey="volume" 
+                  radius={[4, 4, 0, 0]}
+                  maxBarSize={60}
+                >
                   {regionalSentimentData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={getSentimentColor(entry.sentimentScore)} />
                   ))}
