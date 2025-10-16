@@ -809,7 +809,7 @@ export const SentimentBreakdown = () => {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-muted-foreground flex items-center gap-2">
             <span className="h-px w-8 bg-border"></span>
-            7. Influencer & Engagement Analytics
+            Influencer & Engagement Analytics
           </h3>
           
           {/* Platform Selector Dropdown */}
