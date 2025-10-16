@@ -9,20 +9,20 @@ const sentimentData = [
   { name: "Negative", value: 9, color: "#EF4444" },
 ];
 
-const positivePoints = [
-  "Easy to use",
-  "Rechargeable battery",
-  "Precise cutting",
-  "Multiple attachments",
-  "Travel-friendly",
+const positiveKeywords = [
+  { keyword: "Easy to use", frequency: 245 },
+  { keyword: "Rechargeable", frequency: 198 },
+  { keyword: "Travel-friendly", frequency: 167 },
+  { keyword: "Precise cutting", frequency: 134 },
+  { keyword: "Multiple attachments", frequency: 112 },
 ];
 
-const negativePoints = [
-  "Battery life issues",
-  "Noisy operation",
-  "Requires frequent maintenance",
-  "Blades dull quickly",
-  "Not waterproof",
+const negativeKeywords = [
+  { keyword: "Battery life", frequency: 156 },
+  { keyword: "Noisy", frequency: 89 },
+  { keyword: "Maintenance", frequency: 67 },
+  { keyword: "Blades dull", frequency: 54 },
+  { keyword: "Not waterproof", frequency: 41 },
 ];
 
 // New metrics data
@@ -30,15 +30,6 @@ const sentimentDelta = 12.5; // % change over time
 const sentimentScore = 7.8; // weighted average (0-10 scale)
 const shareOfVoice = 34.2; // % of total market mentions
 const sentimentDifferentialIndex = { ourBrand: 7.8, competitor: 6.2 }; // comparison
-
-const topKeywords = [
-  { keyword: "Easy to use", sentiment: "positive", frequency: 245 },
-  { keyword: "Battery life", sentiment: "negative", frequency: 156 },
-  { keyword: "Rechargeable", sentiment: "positive", frequency: 198 },
-  { keyword: "Noisy", sentiment: "negative", frequency: 89 },
-  { keyword: "Travel-friendly", sentiment: "positive", frequency: 167 },
-];
-
 const responseTimeToNegativity = 4.2; // average hours
 
 export const SentimentBreakdown = () => {
@@ -93,10 +84,21 @@ export const SentimentBreakdown = () => {
             </div>
             
             <div className="space-y-3">
-              {positivePoints.map((point, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <Check className="h-4 w-4 text-rising-trend mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-foreground">{point}</span>
+              {positiveKeywords.map((item, index) => (
+                <div key={index} className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 flex-1">
+                    <Check className="h-4 w-4 text-rising-trend mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-foreground">{item.keyword}</span>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="h-1.5 w-16 bg-muted rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-rising-trend"
+                        style={{ width: `${(item.frequency / 250) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-xs font-bold text-rising-trend min-w-[2.5rem] text-right">{item.frequency}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -110,10 +112,21 @@ export const SentimentBreakdown = () => {
             </div>
             
             <div className="space-y-3">
-              {negativePoints.map((point, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <X className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-foreground">{point}</span>
+              {negativeKeywords.map((item, index) => (
+                <div key={index} className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-3 flex-1">
+                    <X className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-foreground">{item.keyword}</span>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="h-1.5 w-16 bg-muted rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-destructive"
+                        style={{ width: `${(item.frequency / 160) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-xs font-bold text-destructive min-w-[2.5rem] text-right">{item.frequency}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -212,41 +225,6 @@ export const SentimentBreakdown = () => {
             <p className="text-xs text-muted-foreground mt-1">To negative mentions</p>
           </Card>
         </div>
-
-        {/* Top Keywords/Topics Frequency */}
-        <Card className="bg-card/50 border-border/50 p-4">
-          <div className="flex items-center gap-2 mb-4">
-            <Hash className="h-5 w-5 text-primary" />
-            <h4 className="font-semibold text-foreground">Top Keywords/Topics Frequency</h4>
-          </div>
-          <div className="space-y-3">
-            {topKeywords.map((item, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Badge 
-                    variant={item.sentiment === "positive" ? "default" : "destructive"}
-                    className={item.sentiment === "positive" 
-                      ? "bg-rising-trend/20 text-rising-trend border-rising-trend/30" 
-                      : "bg-destructive/20 text-destructive border-destructive/30"
-                    }
-                  >
-                    {item.sentiment}
-                  </Badge>
-                  <span className="text-sm font-medium text-foreground">{item.keyword}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-32 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full ${item.sentiment === "positive" ? "bg-rising-trend" : "bg-destructive"}`}
-                      style={{ width: `${(item.frequency / 250) * 100}%` }}
-                    />
-                  </div>
-                  <span className="text-sm font-bold text-foreground min-w-[3rem] text-right">{item.frequency}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
       </Card>
     </div>
   );
