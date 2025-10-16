@@ -71,23 +71,23 @@ const uspOpportunities: Opportunity[] = [
 const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
   return (
     <Card 
-      className="bg-gradient-card border-border/50 p-6 transition-all duration-300 hover:scale-105 hover:shadow-glow"
+      className="bg-card/50 border-border/50 p-6 hover:bg-card/70 transition-colors"
     >
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-primary p-3 rounded-lg">
-            <Star className="h-5 w-5 text-primary-foreground fill-primary-foreground" />
+          <div className="bg-muted/50 p-3 rounded-lg">
+            <Star className="h-5 w-5 text-primary" />
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <Badge className="bg-accent/20 text-accent border-accent/30 text-xs">
+              <Badge variant="outline" className="text-xs">
                 RANK #{opportunity.rank}
               </Badge>
               <Badge variant="outline" className="text-xs">
                 {opportunity.category}
               </Badge>
             </div>
-            <h4 className="font-bold text-lg text-foreground">{opportunity.title}</h4>
+            <h4 className="font-semibold text-foreground">{opportunity.title}</h4>
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
             <Users className="h-3 w-3" />
             <span className="text-xs">Mentions</span>
           </div>
-          <p className="text-lg font-bold text-foreground">{opportunity.mentions.toLocaleString()}</p>
+          <p className="text-lg font-semibold text-foreground">{opportunity.mentions.toLocaleString()}</p>
         </div>
 
         <div className="space-y-1">
@@ -106,7 +106,7 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
             <Target className="h-3 w-3" />
             <span className="text-xs">Engagement</span>
           </div>
-          <p className="text-lg font-bold text-rising-trend">{opportunity.engagement}%</p>
+          <p className="text-lg font-semibold text-foreground">{opportunity.engagement}%</p>
         </div>
 
         <div className="space-y-1">
@@ -114,18 +114,18 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
             <TrendingUp className="h-3 w-3" />
             <span className="text-xs">Growth</span>
           </div>
-          <p className="text-lg font-bold text-hot-trend">{opportunity.trend}</p>
+          <p className="text-lg font-semibold text-foreground">{opportunity.trend}</p>
         </div>
       </div>
 
       <div className="mt-4 pt-4 border-t border-border/50">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Opportunity Score</span>
-          <span className="font-bold text-primary">{(100 - (opportunity.rank - 1) * 5).toFixed(0)}/100</span>
+          <span className="font-semibold text-foreground">{(100 - (opportunity.rank - 1) * 5).toFixed(0)}/100</span>
         </div>
-        <div className="mt-2 h-2 bg-background/30 rounded-full overflow-hidden">
+        <div className="mt-2 h-2 bg-muted/30 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-gradient-primary transition-all duration-500"
+            className="h-full bg-primary transition-all duration-500"
             style={{ width: `${100 - (opportunity.rank - 1) * 5}%` }}
           />
         </div>
@@ -136,9 +136,9 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
 
 export const WhitespaceOpportunities = () => {
   return (
-    <div className="space-y-8 animate-slide-up">
+    <div className="space-y-8 animate-fade-in">
       <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">WHITESPACE OPPORTUNITIES</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Whitespace Opportunities</h2>
         <p className="text-muted-foreground">
           White spaces are opportunities for brands to action on. They are ranked by Number of Mention and Engagement
         </p>
@@ -146,9 +146,9 @@ export const WhitespaceOpportunities = () => {
 
       {/* Feature Section */}
       <div className="space-y-4">
-        <Badge className="bg-primary/20 text-primary border-primary/30 text-sm px-4 py-1">
+        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
           Feature
-        </Badge>
+        </h3>
         <div className="grid gap-4 md:grid-cols-2">
           {featureOpportunities.map((opportunity) => (
             <OpportunityCard key={opportunity.rank} opportunity={opportunity} />
@@ -158,9 +158,9 @@ export const WhitespaceOpportunities = () => {
 
       {/* Ingredients Section */}
       <div className="space-y-4">
-        <Badge className="bg-rising-trend/20 text-rising-trend border-rising-trend/30 text-sm px-4 py-1">
+        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
           Ingredients
-        </Badge>
+        </h3>
         <div className="grid gap-4 md:grid-cols-2">
           {ingredientOpportunities.map((opportunity) => (
             <OpportunityCard key={opportunity.rank} opportunity={opportunity} />
@@ -170,9 +170,9 @@ export const WhitespaceOpportunities = () => {
 
       {/* USP Section */}
       <div className="space-y-4">
-        <Badge className="bg-accent/20 text-accent border-accent/30 text-sm px-4 py-1">
+        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
           USP
-        </Badge>
+        </h3>
         <div className="grid gap-4 md:grid-cols-2">
           {uspOpportunities.map((opportunity) => (
             <OpportunityCard key={opportunity.rank} opportunity={opportunity} />
