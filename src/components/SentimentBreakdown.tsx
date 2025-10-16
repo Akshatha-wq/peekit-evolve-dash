@@ -2,6 +2,8 @@ import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { useState } from "react";
 
 const sentimentData = [
   { name: "Positive", value: 72, color: "#3B82F6" },
@@ -34,15 +36,28 @@ const responseTimeToNegativity = 4.2; // average hours
 
 // Geography & Customer Segmentation data
 const regionalSentimentData = [
-  { region: "Maharashtra", sentimentScore: 8.2, volume: 2845, color: "#3B82F6" },
-  { region: "Karnataka", sentimentScore: 7.9, volume: 2134, color: "#10B981" },
-  { region: "Delhi NCR", sentimentScore: 7.5, volume: 1923, color: "#8B5CF6" },
-  { region: "Tamil Nadu", sentimentScore: 8.0, volume: 1678, color: "#F59E0B" },
-  { region: "West Bengal", sentimentScore: 6.8, volume: 1234, color: "#EF4444" },
-  { region: "Gujarat", sentimentScore: 7.8, volume: 1456, color: "#06B6D4" },
-  { region: "Rajasthan", sentimentScore: 7.2, volume: 987, color: "#EC4899" },
-  { region: "Uttar Pradesh", sentimentScore: 6.5, volume: 1567, color: "#F97316" },
+  { region: "Maharashtra", sentimentScore: 8.2, volume: 2845 },
+  { region: "Karnataka", sentimentScore: 7.9, volume: 2134 },
+  { region: "Delhi", sentimentScore: 7.5, volume: 1923 },
+  { region: "Tamil Nadu", sentimentScore: 8.0, volume: 1678 },
+  { region: "West Bengal", sentimentScore: 6.8, volume: 1234 },
+  { region: "Gujarat", sentimentScore: 7.8, volume: 1456 },
+  { region: "Rajasthan", sentimentScore: 7.2, volume: 987 },
+  { region: "Uttar Pradesh", sentimentScore: 6.5, volume: 1567 },
+  { region: "Madhya Pradesh", sentimentScore: 7.1, volume: 1123 },
+  { region: "Kerala", sentimentScore: 8.1, volume: 934 },
+  { region: "Telangana", sentimentScore: 7.7, volume: 1345 },
+  { region: "Punjab", sentimentScore: 7.3, volume: 876 },
 ];
+
+// Function to get color based on sentiment score
+const getSentimentColor = (score: number) => {
+  if (score >= 7.5) return "#10B981"; // Green for high sentiment
+  if (score >= 6.5) return "#F59E0B"; // Amber for medium sentiment
+  return "#EF4444"; // Red for low sentiment
+};
+
+const INDIA_TOPO_JSON = "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/india/india-states.json";
 
 const customerTypeData = [
   { name: "Transacted Users", value: 68, color: "#3B82F6" },
@@ -58,6 +73,14 @@ const regionalConversionOpportunity = [
 const hotspotCount = 5; // regions with >20% sentiment change MoM
 
 export const SentimentBreakdown = () => {
+  const [tooltipContent, setTooltipContent] = useState("");
+
+  // Create a map for quick lookup of sentiment data by state name
+  const sentimentMap = regionalSentimentData.reduce((acc, item) => {
+    acc[item.region] = item;
+    return acc;
+  }, {} as Record<string, typeof regionalSentimentData[0]>);
+
   return (
     <div className="space-y-6 animate-slide-up">
       <h2 className="text-2xl font-bold text-foreground">Sentiment Breakdown</h2>
@@ -260,32 +283,90 @@ export const SentimentBreakdown = () => {
         </h3>
 
         <div className="grid lg:grid-cols-2 gap-6 mb-6">
-          {/* Regional Sentiment Index (RSI) */}
+          {/* Regional Sentiment Index (RSI) - India Map */}
           <Card className="bg-card/50 border-border/50 p-6">
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="h-5 w-5 text-primary" />
               <h4 className="text-lg font-bold text-foreground">Regional Sentiment Index</h4>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={regionalSentimentData} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis type="number" domain={[0, 10]} stroke="hsl(var(--muted-foreground))" />
-                <YAxis type="category" dataKey="region" width={100} stroke="hsl(var(--muted-foreground))" />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: "hsl(var(--popover))", 
-                    border: "1px solid hsl(var(--border))",
-                    borderRadius: "0.5rem",
-                    color: "hsl(var(--foreground))"
-                  }}
-                />
-                <Bar dataKey="sentimentScore" fill="#3B82F6" radius={[0, 4, 4, 0]}>
-                  {regionalSentimentData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="relative">
+              <ComposableMap
+                projection="geoMercator"
+                projectionConfig={{
+                  scale: 1000,
+                  center: [78.9629, 22.5937]
+                }}
+                width={800}
+                height={600}
+                className="w-full h-auto"
+              >
+                <Geographies geography={INDIA_TOPO_JSON}>
+                  {({ geographies }) =>
+                    geographies.map((geo) => {
+                      const stateName = geo.properties.NAME_1 || geo.properties.st_nm;
+                      const sentimentData = sentimentMap[stateName];
+                      const fillColor = sentimentData 
+                        ? getSentimentColor(sentimentData.sentimentScore)
+                        : "hsl(var(--muted))";
+
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={fillColor}
+                          stroke="hsl(var(--border))"
+                          strokeWidth={0.5}
+                          style={{
+                            default: { outline: "none" },
+                            hover: { 
+                              fill: "hsl(var(--primary))", 
+                              outline: "none",
+                              cursor: "pointer"
+                            },
+                            pressed: { outline: "none" }
+                          }}
+                          onMouseEnter={() => {
+                            if (sentimentData) {
+                              setTooltipContent(
+                                `${stateName}: ${sentimentData.sentimentScore}/10 (${sentimentData.volume} mentions)`
+                              );
+                            } else {
+                              setTooltipContent(`${stateName}: No data`);
+                            }
+                          }}
+                          onMouseLeave={() => {
+                            setTooltipContent("");
+                          }}
+                        />
+                      );
+                    })
+                  }
+                </Geographies>
+              </ComposableMap>
+              
+              {/* Tooltip */}
+              {tooltipContent && (
+                <div className="absolute top-4 left-4 bg-popover border border-border rounded-lg p-3 shadow-lg">
+                  <p className="text-sm font-medium text-foreground">{tooltipContent}</p>
+                </div>
+              )}
+
+              {/* Legend */}
+              <div className="mt-4 flex items-center justify-center gap-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded" style={{ backgroundColor: "#10B981" }}></div>
+                  <span className="text-xs text-muted-foreground">High (7.5+)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded" style={{ backgroundColor: "#F59E0B" }}></div>
+                  <span className="text-xs text-muted-foreground">Medium (6.5-7.5)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded" style={{ backgroundColor: "#EF4444" }}></div>
+                  <span className="text-xs text-muted-foreground">Low (&lt;6.5)</span>
+                </div>
+              </div>
+            </div>
           </Card>
 
           {/* Volume by Geography */}
@@ -309,7 +390,7 @@ export const SentimentBreakdown = () => {
                 />
                 <Bar dataKey="volume" fill="#10B981" radius={[4, 4, 0, 0]}>
                   {regionalSentimentData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    <Cell key={`cell-${index}`} fill={getSentimentColor(entry.sentimentScore)} />
                   ))}
                 </Bar>
               </BarChart>
