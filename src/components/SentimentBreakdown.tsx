@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, Area, AreaChart } from "recharts";
-import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3, Star, Target } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3, Star, Target, Play, Heart, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -112,6 +112,30 @@ const campaignTimingEffectiveness = 32.5; // % engagement uplift
 const optimalPostingWindow = "Friday 3PM - 6PM";
 
 // Influencer & Engagement Analytics Data
+const topContent = [
+  { 
+    title: "BCAA vs EAA - What You Need to Know",
+    platform: "TikTok",
+    views: "6.4M",
+    metric: { label: "shares", value: "187K", icon: Share2 },
+    category: "most-shared"
+  },
+  { 
+    title: "Best Amino Acid Supplements for Athletes",
+    platform: "YouTube",
+    views: "3.9M",
+    metric: { label: "comments", value: "24.6K", icon: MessageCircle },
+    category: "most-comments"
+  },
+  { 
+    title: "How Amino Acids Changed My Recovery",
+    platform: "Instagram",
+    views: "5.7M",
+    metric: { label: "likes", value: "2.8M", icon: Heart },
+    category: "most-likes"
+  }
+];
+
 const influencerData = [
   { name: "@TechGuru", followers: 245000, likes: 12340, comments: 890, shares: 567, posts: 8, conversions: 342, cost: 15000 },
   { name: "@StyleInfluencer", followers: 189000, likes: 9870, comments: 654, shares: 423, posts: 6, conversions: 289, cost: 12000 },
@@ -918,6 +942,121 @@ export const SentimentBreakdown = () => {
             </p>
           </Card>
         </div>
+
+        {/* Top Content Section */}
+        <Card className="bg-card/50 border-border/50 p-6 mb-6">
+          <h4 className="text-xl font-bold text-foreground mb-6">Top Content</h4>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Most Shared */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Share2 className="h-5 w-5 text-primary" />
+                <h5 className="text-lg font-semibold text-foreground">Most Shared</h5>
+              </div>
+              
+              <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20 overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-card to-muted/50 flex items-center justify-center border-b border-border/50">
+                  <Play className="h-16 w-16 text-muted-foreground/30" />
+                </div>
+                
+                <div className="p-4 space-y-3">
+                  <h6 className="font-semibold text-foreground line-clamp-2">
+                    {topContent[0].title}
+                  </h6>
+                  
+                  <div className="flex items-center justify-between">
+                    <Badge variant="outline" className="text-xs">
+                      {topContent[0].platform}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {topContent[0].views} views
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-primary">
+                    <Share2 className="h-4 w-4" />
+                    <span className="text-sm font-bold">
+                      {topContent[0].metric.value} {topContent[0].metric.label}
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            {/* Most Comments */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <MessageCircle className="h-5 w-5 text-accent" />
+                <h5 className="text-lg font-semibold text-foreground">Most Comments</h5>
+              </div>
+              
+              <Card className="bg-gradient-to-br from-accent/10 to-accent/5 border-accent/20 overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-card to-muted/50 flex items-center justify-center border-b border-border/50">
+                  <Play className="h-16 w-16 text-muted-foreground/30" />
+                </div>
+                
+                <div className="p-4 space-y-3">
+                  <h6 className="font-semibold text-foreground line-clamp-2">
+                    {topContent[1].title}
+                  </h6>
+                  
+                  <div className="flex items-center justify-between">
+                    <Badge variant="outline" className="text-xs">
+                      {topContent[1].platform}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {topContent[1].views} views
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-accent">
+                    <MessageCircle className="h-4 w-4" />
+                    <span className="text-sm font-bold">
+                      {topContent[1].metric.value} {topContent[1].metric.label}
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            {/* Most Likes */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Heart className="h-5 w-5 text-rising-trend" />
+                <h5 className="text-lg font-semibold text-foreground">Most Likes</h5>
+              </div>
+              
+              <Card className="bg-gradient-to-br from-rising-trend/10 to-rising-trend/5 border-rising-trend/20 overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-card to-muted/50 flex items-center justify-center border-b border-border/50">
+                  <Play className="h-16 w-16 text-muted-foreground/30" />
+                </div>
+                
+                <div className="p-4 space-y-3">
+                  <h6 className="font-semibold text-foreground line-clamp-2">
+                    {topContent[2].title}
+                  </h6>
+                  
+                  <div className="flex items-center justify-between">
+                    <Badge variant="outline" className="text-xs">
+                      {topContent[2].platform}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">
+                      {topContent[2].views} views
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-rising-trend">
+                    <Heart className="h-4 w-4" />
+                    <span className="text-sm font-bold">
+                      {topContent[2].metric.value} {topContent[2].metric.label}
+                    </span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </Card>
 
         {/* Key Influencers & Complementary Keywords */}
         <Card className="bg-card/50 border-border/50 p-6">
