@@ -126,6 +126,36 @@ const avgInfluencerROI = 2.8; // average ROI
 
 const platforms = ["All Platforms", "Instagram", "YouTube", "Twitter", "TikTok", "LinkedIn"];
 
+// Predictive Engagement & NPS Modeling Data
+const predictedNPS = 42;
+const actualNPS = 45;
+const predictionAccuracy = 93.5; // percentage
+const engagementNPSCorrelation = 0.87; // correlation coefficient (r)
+const earlyDetectorDetectionRate = 76.3; // percentage
+
+const npsComparisonData = [
+  { month: "Jan", predicted: 38, actual: 40 },
+  { month: "Feb", predicted: 41, actual: 42 },
+  { month: "Mar", predicted: 43, actual: 44 },
+  { month: "Apr", predicted: 42, actual: 45 },
+  { month: "May", predicted: 45, actual: 46 },
+  { month: "Jun", predicted: 44, actual: 43 },
+];
+
+const npsSegmentData = [
+  { segment: "Promoters", predicted: 58, actual: 62, color: "#10B981" },
+  { segment: "Passives", predicted: 28, actual: 25, color: "#F59E0B" },
+  { segment: "Detractors", predicted: 14, actual: 13, color: "#EF4444" },
+];
+
+const detectorMetrics = {
+  totalDetractors: 248,
+  flaggedPreSurvey: 189,
+  accurateFlags: 176,
+  falsePositives: 13,
+};
+
+
 export const SentimentBreakdown = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("All Platforms");
 
@@ -943,6 +973,223 @@ export const SentimentBreakdown = () => {
           <div className="mt-4 pt-4 border-t border-border/50">
             <p className="text-xs text-muted-foreground text-center">
               Data source: {selectedPlatform} • Updated in real-time
+            </p>
+          </div>
+        </Card>
+      </Card>
+
+      {/* Predictive Engagement & NPS Modeling Section */}
+      <Card className="bg-gradient-card border-border/50 p-6">
+        <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
+          <span className="h-px w-8 bg-border"></span>
+          Predictive Engagement & NPS Modeling
+        </h3>
+        <p className="text-sm text-muted-foreground mb-6">
+          Forecast brand promoters/detractors using engagement data from social platforms
+        </p>
+
+        {/* Key Metrics Overview */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          {/* Predicted NPS vs Actual */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              <h4 className="font-semibold text-foreground">NPS Score</h4>
+            </div>
+            <div className="space-y-2 mt-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Predicted:</span>
+                <span className="text-2xl font-bold text-primary">{predictedNPS}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Actual:</span>
+                <span className="text-2xl font-bold text-accent">{actualNPS}</span>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Modelled vs actual NPS
+            </p>
+          </Card>
+
+          {/* Prediction Accuracy */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Scale className="h-5 w-5 text-rising-trend" />
+              <h4 className="font-semibold text-foreground">Prediction Accuracy</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-rising-trend">{predictionAccuracy}%</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Model accuracy rate
+            </p>
+          </Card>
+
+          {/* Engagement-NPS Correlation */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <GitCompare className="h-5 w-5 text-accent" />
+              <h4 className="font-semibold text-foreground">Correlation (r)</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-accent">{engagementNPSCorrelation}</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Engagement-NPS correlation
+            </p>
+          </Card>
+
+          {/* Early Detractor Detection Rate */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <AlertCircle className="h-5 w-5 text-warning" />
+              <h4 className="font-semibold text-foreground">Detractor Detection</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-warning">{earlyDetectorDetectionRate}%</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Flagged pre-survey ÷ total detractors
+            </p>
+          </Card>
+        </div>
+
+        {/* Charts Row */}
+        <div className="grid lg:grid-cols-2 gap-6 mb-6">
+          {/* NPS Prediction vs Actual Trend */}
+          <Card className="bg-card/50 border-border/50 p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Activity className="h-5 w-5 text-primary" />
+              <h4 className="text-lg font-bold text-foreground">NPS Prediction vs Actual</h4>
+            </div>
+            <ResponsiveContainer width="100%" height={280}>
+              <LineChart data={npsComparisonData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
+                <XAxis 
+                  dataKey="month" 
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis 
+                  domain={[30, 50]}
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                  label={{ value: 'NPS Score', angle: -90, position: 'insideLeft', style: { fill: 'hsl(var(--muted-foreground))' } }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: "hsl(var(--popover))", 
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "0.5rem",
+                    color: "hsl(var(--foreground))"
+                  }}
+                />
+                <Legend 
+                  verticalAlign="top"
+                  height={36}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="predicted" 
+                  stroke="#3B82F6" 
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={{ r: 4 }}
+                  name="Predicted NPS"
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="actual" 
+                  stroke="#10B981" 
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  name="Actual NPS"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+            <p className="text-xs text-muted-foreground mt-3 text-center">
+              6-month prediction accuracy tracking
+            </p>
+          </Card>
+
+          {/* NPS Segment Distribution */}
+          <Card className="bg-card/50 border-border/50 p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Users className="h-5 w-5 text-accent" />
+              <h4 className="text-lg font-bold text-foreground">Promoter/Detractor Prediction</h4>
+            </div>
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={npsSegmentData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
+                <XAxis 
+                  dataKey="segment" 
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis 
+                  stroke="hsl(var(--muted-foreground))"
+                  tick={{ fontSize: 12 }}
+                  label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft', style: { fill: 'hsl(var(--muted-foreground))' } }}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: "hsl(var(--popover))", 
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "0.5rem",
+                    color: "hsl(var(--foreground))"
+                  }}
+                />
+                <Legend 
+                  verticalAlign="top"
+                  height={36}
+                />
+                <Bar dataKey="predicted" name="Predicted %" radius={[4, 4, 0, 0]} maxBarSize={60}>
+                  {npsSegmentData.map((entry, index) => (
+                    <Cell key={`cell-predicted-${index}`} fill={entry.color} opacity={0.6} />
+                  ))}
+                </Bar>
+                <Bar dataKey="actual" name="Actual %" radius={[4, 4, 0, 0]} maxBarSize={60}>
+                  {npsSegmentData.map((entry, index) => (
+                    <Cell key={`cell-actual-${index}`} fill={entry.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="text-xs text-muted-foreground mt-3 text-center">
+              Predicted vs actual segment distribution
+            </p>
+          </Card>
+        </div>
+
+        {/* Detractor Detection Breakdown */}
+        <Card className="bg-card/50 border-border/50 p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <AlertCircle className="h-5 w-5 text-destructive" />
+            <h4 className="text-lg font-bold text-foreground">Early Detractor Detection Metrics</h4>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-card rounded-lg border border-border/50">
+              <p className="text-sm text-muted-foreground mb-2">Total Detractors</p>
+              <p className="text-3xl font-bold text-foreground">{detectorMetrics.totalDetractors}</p>
+            </div>
+            <div className="text-center p-4 bg-warning/5 rounded-lg border border-warning/30">
+              <p className="text-sm text-muted-foreground mb-2">Flagged Pre-Survey</p>
+              <p className="text-3xl font-bold text-warning">{detectorMetrics.flaggedPreSurvey}</p>
+            </div>
+            <div className="text-center p-4 bg-rising-trend/5 rounded-lg border border-rising-trend/30">
+              <p className="text-sm text-muted-foreground mb-2">Accurate Flags</p>
+              <p className="text-3xl font-bold text-rising-trend">{detectorMetrics.accurateFlags}</p>
+            </div>
+            <div className="text-center p-4 bg-destructive/5 rounded-lg border border-destructive/30">
+              <p className="text-sm text-muted-foreground mb-2">False Positives</p>
+              <p className="text-3xl font-bold text-destructive">{detectorMetrics.falsePositives}</p>
+            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-border/50">
+            <p className="text-xs text-muted-foreground text-center">
+              Detection powered by social engagement patterns and sentiment analysis
             </p>
           </div>
         </Card>
