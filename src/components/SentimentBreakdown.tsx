@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, Area, AreaChart } from "recharts";
-import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3, Star, Target, Play, Heart, MessageCircle } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3, Star, Target, Play, Heart, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const sentimentData = [
   { name: "Positive", value: 72, color: "#3B82F6" },
@@ -207,8 +209,46 @@ const detectorMetrics = {
 };
 
 
+const SectionHeader = ({ id, title, icon: Icon, isOpen }: { 
+  id: string; 
+  title: string; 
+  icon?: any;
+  isOpen: boolean;
+}) => (
+  <CollapsibleTrigger asChild>
+    <div id={id} className="scroll-mt-24 mb-6 w-full">
+      <Button
+        variant="ghost"
+        className="w-full flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20 hover:bg-transparent p-0 h-auto rounded-none"
+      >
+        <div className="flex items-center gap-3">
+          {Icon && <Icon className="h-6 w-6 text-primary" />}
+          <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            {title}
+          </h2>
+        </div>
+        {isOpen ? (
+          <ChevronUp className="h-5 w-5 text-muted-foreground transition-transform" />
+        ) : (
+          <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform" />
+        )}
+      </Button>
+    </div>
+  </CollapsibleTrigger>
+);
+
 export const SentimentBreakdown = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("All Platforms");
+  const [openSections, setOpenSections] = useState({
+    temporal: true,
+    geography: true,
+    influencer: true,
+    predictive: true,
+  });
+
+  const toggleSection = (section: keyof typeof openSections) => {
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
+  };
 
   // Calculate influencer metrics
   const calculateEngagementRate = (influencer: typeof influencerData[0]) => {
@@ -412,11 +452,19 @@ export const SentimentBreakdown = () => {
       </Card>
 
       {/* Geography & Customer Segmentation */}
-      <Card id="geography-customer-segmentation" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
-        <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
-          <span className="h-px w-8 bg-border"></span>
-          Geography & Customer Segmentation
-        </h3>
+      <Collapsible
+        open={openSections.geography}
+        onOpenChange={() => toggleSection('geography')}
+      >
+        <SectionHeader 
+          id="geography-customer-segmentation" 
+          title="Geography & Customer Segmentation" 
+          icon={MapPin}
+          isOpen={openSections.geography}
+        />
+        
+        <CollapsibleContent>
+          <Card className="bg-card/50 border-border/50 p-6">
 
         <div className="grid lg:grid-cols-2 gap-6 mb-6">
           {/* Regional Sentiment Index (RSI) */}
@@ -637,14 +685,24 @@ export const SentimentBreakdown = () => {
             </p>
           </Card>
         </div>
-      </Card>
+          </Card>
+        </CollapsibleContent>
+      </Collapsible>
 
       {/* Temporal Analysis Section */}
-      <Card id="temporal-analysis" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
-        <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
-          <span className="h-px w-8 bg-border"></span>
-          Temporal Analysis
-        </h3>
+      <Collapsible
+        open={openSections.temporal}
+        onOpenChange={() => toggleSection('temporal')}
+      >
+        <SectionHeader 
+          id="temporal-analysis" 
+          title="Temporal Analysis" 
+          icon={Clock}
+          isOpen={openSections.temporal}
+        />
+        
+        <CollapsibleContent>
+          <Card className="bg-card/50 border-border/50 p-6">
 
         {/* Time-based Charts */}
         <div className="grid lg:grid-cols-2 gap-6 mb-6">
@@ -881,33 +939,43 @@ export const SentimentBreakdown = () => {
             </p>
           </Card>
         </div>
-      </Card>
+          </Card>
+        </CollapsibleContent>
+      </Collapsible>
 
       {/* Influencer & Engagement Analytics Section */}
-      <Card id="influencer-engagement-analytics" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-muted-foreground flex items-center gap-2">
-            <span className="h-px w-8 bg-border"></span>
-            Influencer & Engagement Analytics
-          </h3>
-          
-          {/* Platform Selector Dropdown */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Platform:</span>
-            <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[180px] bg-card">
-                <SelectValue placeholder="Select platform" />
-              </SelectTrigger>
-              <SelectContent className="bg-popover z-50">
-                {platforms.map((platform) => (
-                  <SelectItem key={platform} value={platform}>
-                    {platform}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+      <Collapsible
+        open={openSections.influencer}
+        onOpenChange={() => toggleSection('influencer')}
+      >
+        <div className="flex items-center justify-between w-full">
+          <SectionHeader 
+            id="influencer-engagement-analytics" 
+            title="Influencer & Engagement Analytics" 
+            icon={Users}
+            isOpen={openSections.influencer}
+          />
+        
+          <CollapsibleContent>
+            <Card className="bg-card/50 border-border/50 p-6 mb-6">
+              <div className="flex items-center justify-end mb-6">
+              {/* Platform Selector Dropdown */}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Platform:</span>
+                <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
+                  <SelectTrigger className="w-[180px] bg-card">
+                    <SelectValue placeholder="Select platform" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    {platforms.map((platform) => (
+                      <SelectItem key={platform} value={platform}>
+                        {platform}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
         {/* Key Metrics Overview */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -1208,17 +1276,28 @@ export const SentimentBreakdown = () => {
             ))}
           </div>
         </Card>
-      </Card>
+            </Card>
+          </CollapsibleContent>
+        </div>
+      </Collapsible>
 
       {/* Predictive Engagement & NPS Modeling Section */}
-      <Card id="predictive-engagement-nps" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
-        <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
-          <span className="h-px w-8 bg-border"></span>
-          Predictive Engagement & NPS Modeling
-        </h3>
-        <p className="text-sm text-muted-foreground mb-6">
-          Forecast brand promoters/detractors using engagement data from social platforms
-        </p>
+      <Collapsible
+        open={openSections.predictive}
+        onOpenChange={() => toggleSection('predictive')}
+      >
+        <SectionHeader 
+          id="predictive-engagement-nps" 
+          title="Predictive Engagement & NPS Modeling" 
+          icon={Target}
+          isOpen={openSections.predictive}
+        />
+        
+        <CollapsibleContent>
+          <Card className="bg-card/50 border-border/50 p-6">
+            <p className="text-sm text-muted-foreground mb-6">
+              Forecast brand promoters/detractors using engagement data from social platforms
+            </p>
 
         {/* Key Metrics Overview */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -1425,7 +1504,9 @@ export const SentimentBreakdown = () => {
             </p>
           </div>
         </Card>
-      </Card>
+          </Card>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 };
