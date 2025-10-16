@@ -57,7 +57,7 @@ const getSentimentColor = (score: number) => {
   return "#EF4444"; // Red for low sentiment
 };
 
-const INDIA_TOPO_JSON = "https://raw.githubusercontent.com/deldersveld/topojson/master/countries/india/india-states.json";
+const INDIA_TOPO_JSON = "https://raw.githubusercontent.com/shuklaneerajdev/IndiaStateTopojsonFiles/main/india_states_topo.json";
 
 const customerTypeData = [
   { name: "Transacted Users", value: 68, color: "#3B82F6" },
