@@ -136,6 +136,33 @@ const topContent = [
   }
 ];
 
+const brandDiscoveries = [
+  {
+    brand: "Optimum Nutrition BCAA Review",
+    description: "Testing the gold standard of amino acids",
+    platform: "YouTube",
+    views: "1.9M"
+  },
+  {
+    brand: "Xtend Elite BCAA",
+    description: "Premium amino acids for serious athletes",
+    platform: "Instagram",
+    views: "1.3M"
+  },
+  {
+    brand: "Scivation Xtend Original BCAA",
+    description: "Most popular flavored amino acid powder",
+    platform: "TikTok",
+    views: "1.1M"
+  },
+  {
+    brand: "Kaged Muscle Fermented BCAAs",
+    description: "Plant-based amino acids that actually work",
+    platform: "YouTube",
+    views: "892K"
+  }
+];
+
 const influencerData = [
   { name: "@TechGuru", followers: 245000, likes: 12340, comments: 890, shares: 567, posts: 8, conversions: 342, cost: 15000 },
   { name: "@StyleInfluencer", followers: 189000, likes: 9870, comments: 654, shares: 423, posts: 6, conversions: 289, cost: 12000 },
@@ -1138,6 +1165,47 @@ export const SentimentBreakdown = () => {
             <p className="text-xs text-muted-foreground text-center">
               Data source: {selectedPlatform} • Updated in real-time
             </p>
+          </div>
+        </Card>
+
+        {/* Brand Discovery Section */}
+        <Card className="bg-card/50 border-border/50 p-6 mt-6">
+          <h4 className="text-xl font-bold text-foreground mb-2">Brand Discovery</h4>
+          <p className="text-sm text-muted-foreground mb-6">Top Brand discoveries for you</p>
+          
+          <div className="space-y-4">
+            {brandDiscoveries.map((item, index) => (
+              <Card 
+                key={index} 
+                className="bg-gradient-to-br from-card to-muted/30 border-border/50 p-4 hover:border-primary/30 transition-all cursor-pointer group"
+              >
+                <div className="flex items-center gap-4">
+                  {/* Video Thumbnail */}
+                  <div className="flex-shrink-0 w-32 h-20 bg-gradient-to-br from-muted to-card rounded-lg flex items-center justify-center border border-border/50">
+                    <Play className="h-10 w-10 text-muted-foreground/40 group-hover:text-primary/60 transition-colors" />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 space-y-2">
+                    <h5 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {item.brand}
+                    </h5>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <Badge variant="outline" className="text-xs">
+                        {item.platform}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Play className="h-3 w-3" />
+                        {item.views} views
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </Card>
       </Card>
