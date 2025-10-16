@@ -144,6 +144,16 @@ const Dashboard = () => {
               </div>
               <SourceMapping />
             </section>
+
+            <section id="overall-summary" className="scroll-mt-24 space-y-6 mt-8">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Lightbulb className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Overall Summary
+                </h2>
+              </div>
+              <OverallSummary />
+            </section>
           </TabsContent>
 
           {/* Tab 2: Whitespace Opportunities */}
@@ -217,15 +227,6 @@ const Dashboard = () => {
               <PredictiveNPS />
             </section>
 
-            <section id="overall-summary" className="scroll-mt-24 space-y-6 mt-8">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Lightbulb className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Overall Summary
-                </h2>
-              </div>
-              <OverallSummary />
-            </section>
           </TabsContent>
         </Tabs>
 
