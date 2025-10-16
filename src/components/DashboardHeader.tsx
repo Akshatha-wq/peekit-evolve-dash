@@ -2,7 +2,7 @@ import { Search, Filter, Download, TrendingUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import peekitLogo from "@/assets/peekit-logo.jpeg";
+import peekitLogo from "@/assets/peekit-logo.gif";
 import {
   Select,
   SelectContent,
@@ -15,13 +15,14 @@ export const DashboardHeader = () => {
   return (
     <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 z-50 animate-fade-in">
       <div className="container mx-auto px-6 py-4">
-        {/* Peekit.ai Branding */}
-        <div className="flex items-center justify-between gap-4 mb-6">
+        {/* Top Section: Brand + Main Heading */}
+        <div className="flex items-center justify-between gap-8 mb-6">
+          {/* Left: Peekit.ai Branding */}
           <div className="flex items-center gap-3">
             <img 
               src={peekitLogo} 
-              alt="Peekit.ai" 
-              className="h-10 w-auto object-contain"
+              alt="Peekit.ai logo" 
+              className="h-12 w-auto object-contain"
             />
             <div>
               <h1 className="text-2xl font-bold text-foreground">
@@ -31,24 +32,15 @@ export const DashboardHeader = () => {
             </div>
           </div>
 
-          <Button 
-            onClick={() => toast({ 
-              title: "Coming Soon", 
-              description: "PDF download functionality will be available soon." 
-            })}
-            variant="outline"
-            className="gap-2 bg-background border-border/50"
-          >
-            <Download className="h-4 w-4" />
-            Download PDF
-          </Button>
-        </div>
+          {/* Center: Main Heading */}
+          <div className="flex-1 text-center">
+            <h2 className="text-2xl font-bold text-foreground">
+              Monitor your product through Social Intelligence
+            </h2>
+          </div>
 
-        {/* Main Title */}
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-foreground">
-            Monitor your product through Social Intelligence
-          </h2>
+          {/* Right: Empty for now */}
+          <div className="w-32"></div>
         </div>
 
         {/* Product Search Section */}
@@ -107,6 +99,18 @@ export const DashboardHeader = () => {
                 <SelectItem value="tiktok">TikTok</SelectItem>
               </SelectContent>
             </Select>
+
+            <Button 
+              onClick={() => toast({ 
+                title: "Coming Soon", 
+                description: "PDF download functionality will be available soon." 
+              })}
+              variant="outline"
+              className="gap-2 bg-background border-border/50 ml-auto"
+            >
+              <Download className="h-4 w-4" />
+              Download PDF
+            </Button>
           </div>
         </div>
       </div>
