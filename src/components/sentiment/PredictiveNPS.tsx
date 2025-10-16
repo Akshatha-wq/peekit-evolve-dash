@@ -2,26 +2,29 @@ import { Card } from "@/components/ui/card";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const npsComparisonData = [
-  { month: "Jun", predicted: 45, actual: 42 },
-  { month: "Jul", predicted: 48, actual: 47 },
-  { month: "Aug", predicted: 52, actual: 50 },
-  { month: "Sep", predicted: 55, actual: 54 },
-  { month: "Oct", predicted: 58, actual: 57 },
-  { month: "Nov", predicted: 62, actual: null },
+  { month: "Jan", predicted: 38, actual: 40 },
+  { month: "Feb", predicted: 41, actual: 42 },
+  { month: "Mar", predicted: 43, actual: 44 },
+  { month: "Apr", predicted: 42, actual: 45 },
+  { month: "May", predicted: 45, actual: 46 },
+  { month: "Jun", predicted: 44, actual: 43 },
 ];
 
 const npsSegmentData = [
-  { segment: "Promoters", value: 65, color: "hsl(var(--primary))" },
-  { segment: "Passives", value: 23, color: "hsl(var(--muted))" },
-  { segment: "Detractors", value: 12, color: "hsl(var(--destructive))" },
+  { segment: "Promoters", predicted: 58, actual: 62, color: "#10B981" },
+  { segment: "Passives", predicted: 28, actual: 25, color: "#F59E0B" },
+  { segment: "Detractors", predicted: 14, actual: 13, color: "#EF4444" },
 ];
 
-const earlyDetectorMetrics = [
-  { label: "At-Risk Users", value: "234", change: "-12%" },
-  { label: "Churn Probability", value: "18%", change: "+3%" },
-  { label: "Recovery Rate", value: "67%", change: "+8%" },
-  { label: "Intervention Success", value: "72%", change: "+15%" },
-];
+const detectorMetrics = {
+  totalDetractors: 248,
+  flaggedPreSurvey: 189,
+  accurateFlags: 176,
+  falsePositives: 13,
+};
+
+const predictionAccuracy = 93.5;
+
 
 const npsAccuracy = 94.3;
 
@@ -34,7 +37,7 @@ export const PredictiveNPS = () => {
           <h4 className="text-lg font-semibold text-foreground">NPS: Predicted vs Actual</h4>
           <div className="text-right">
             <p className="text-xs text-muted-foreground">Prediction Accuracy</p>
-            <p className="text-lg font-bold text-primary">{npsAccuracy}%</p>
+            <p className="text-lg font-bold text-primary">{predictionAccuracy}%</p>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={300}>
@@ -60,32 +63,31 @@ export const PredictiveNPS = () => {
               <XAxis dataKey="segment" stroke="hsl(var(--muted-foreground))" />
               <YAxis stroke="hsl(var(--muted-foreground))" />
               <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }} />
-              <Bar dataKey="value" fill="hsl(var(--primary))">
-                {npsSegmentData.map((entry, index) => (
-                  <rect key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Bar>
+              <Bar dataKey="predicted" fill="#3B82F6" name="Predicted" />
+              <Bar dataKey="actual" fill="#10B981" name="Actual" />
             </BarChart>
           </ResponsiveContainer>
         </Card>
 
         <Card className="bg-card/50 border-border/50 p-6">
           <h4 className="text-lg font-semibold mb-4 text-foreground">Early Detractor Detection</h4>
-          <div className="space-y-3">
-            {earlyDetectorMetrics.map((metric) => (
-              <div key={metric.label} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                <div>
-                  <p className="text-sm font-medium text-foreground">{metric.label}</p>
-                  <p className="text-xs text-muted-foreground">vs last period</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg font-bold text-foreground">{metric.value}</p>
-                  <p className={`text-xs font-semibold ${metric.change.startsWith('+') && metric.label.includes('Success') ? 'text-primary' : metric.change.startsWith('-') ? 'text-primary' : 'text-destructive'}`}>
-                    {metric.change}
-                  </p>
-                </div>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-3 bg-muted/30 rounded-lg">
+              <p className="text-xs text-muted-foreground mb-1">Total Detractors</p>
+              <p className="text-2xl font-bold text-foreground">{detectorMetrics.totalDetractors}</p>
+            </div>
+            <div className="p-3 bg-muted/30 rounded-lg">
+              <p className="text-xs text-muted-foreground mb-1">Flagged Pre-Survey</p>
+              <p className="text-2xl font-bold text-primary">{detectorMetrics.flaggedPreSurvey}</p>
+            </div>
+            <div className="p-3 bg-muted/30 rounded-lg">
+              <p className="text-xs text-muted-foreground mb-1">Accurate Flags</p>
+              <p className="text-2xl font-bold text-rising-trend">{detectorMetrics.accurateFlags}</p>
+            </div>
+            <div className="p-3 bg-muted/30 rounded-lg">
+              <p className="text-xs text-muted-foreground mb-1">False Positives</p>
+              <p className="text-2xl font-bold text-warning">{detectorMetrics.falsePositives}</p>
+            </div>
           </div>
         </Card>
       </div>

@@ -12,16 +12,61 @@ const keyMetrics = [
 ];
 
 const topContent = [
-  { title: "10 Amazing Ways to Use...", shares: 2340, comments: 456, likes: 8920 },
-  { title: "Why Everyone is Talking About...", shares: 1890, comments: 389, likes: 7650 },
-  { title: "The Ultimate Guide to...", shares: 1560, comments: 312, likes: 6430 },
+  { 
+    title: "BCAA vs EAA - What You Need to Know",
+    platform: "TikTok",
+    views: "6.4M",
+    metric: { label: "shares", value: "187K", icon: Share2 },
+  },
+  { 
+    title: "Best Amino Acid Supplements for Athletes",
+    platform: "YouTube",
+    views: "3.9M",
+    metric: { label: "comments", value: "24.6K", icon: MessageCircle },
+  },
+  { 
+    title: "How Amino Acids Changed My Recovery",
+    platform: "Instagram",
+    views: "5.7M",
+    metric: { label: "likes", value: "2.8M", icon: Heart },
+  }
 ];
 
 const brandDiscoveries = [
-  { brand: "TechReview Daily", mentions: 145, sentiment: "positive" },
-  { brand: "Innovation Hub", mentions: 98, sentiment: "positive" },
-  { brand: "Future Trends", mentions: 67, sentiment: "neutral" },
+  {
+    brand: "Optimum Nutrition BCAA Review",
+    description: "Testing the gold standard of amino acids",
+    platform: "YouTube",
+    views: "1.9M"
+  },
+  {
+    brand: "Xtend Elite BCAA",
+    description: "Premium amino acids for serious athletes",
+    platform: "Instagram",
+    views: "1.3M"
+  },
+  {
+    brand: "Scivation Xtend Original BCAA",
+    description: "Most popular flavored amino acid powder",
+    platform: "TikTok",
+    views: "1.1M"
+  },
+  {
+    brand: "Kaged Muscle Fermented BCAAs",
+    description: "Plant-based amino acids that actually work",
+    platform: "YouTube",
+    views: "892K"
+  }
 ];
+
+const influencerData = [
+  { name: "@TechGuru", followers: 245000, likes: 12340, comments: 890, shares: 567, posts: 8, conversions: 342, cost: 15000 },
+  { name: "@StyleInfluencer", followers: 189000, likes: 9870, comments: 654, shares: 423, posts: 6, conversions: 289, cost: 12000 },
+  { name: "@LifestyleVlogger", followers: 312000, likes: 15600, comments: 1120, shares: 789, posts: 10, conversions: 456, cost: 18000 },
+  { name: "@BeautyExpert", followers: 156000, likes: 8230, comments: 567, shares: 345, posts: 7, conversions: 234, cost: 10000 },
+];
+
+const platforms = ["All Platforms", "Instagram", "YouTube", "Twitter", "TikTok", "LinkedIn"];
 
 const influencersByPlatform = {
   instagram: [
@@ -80,20 +125,13 @@ export const InfluencerEngagement = () => {
         <div className="space-y-3">
           {topContent.map((content, index) => (
             <div key={index} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <span className="text-sm font-medium text-foreground flex-1">{content.title}</span>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Share2 className="h-3 w-3" />
-                  {content.shares}
-                </div>
-                <div className="flex items-center gap-1">
-                  <MessageCircle className="h-3 w-3" />
-                  {content.comments}
-                </div>
-                <div className="flex items-center gap-1">
-                  <Heart className="h-3 w-3" />
-                  {content.likes}
-                </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-foreground">{content.title}</p>
+                <p className="text-xs text-muted-foreground">{content.platform} • {content.views} views</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <content.metric.icon className="h-4 w-4 text-primary" />
+                <span className="text-sm font-semibold text-primary">{content.metric.value}</span>
               </div>
             </div>
           ))}
@@ -124,20 +162,13 @@ export const InfluencerEngagement = () => {
           <h4 className="text-lg font-semibold mb-4 text-foreground">Brand Discoveries</h4>
           <div className="space-y-3">
             {brandDiscoveries.map((brand) => (
-              <div key={brand.brand} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                <div>
-                  <p className="text-sm font-medium text-foreground">{brand.brand}</p>
-                  <p className="text-xs text-muted-foreground">{brand.mentions} mentions</p>
+              <div key={brand.brand} className="p-3 bg-muted/30 rounded-lg">
+                <p className="text-sm font-medium text-foreground mb-1">{brand.brand}</p>
+                <p className="text-xs text-muted-foreground mb-2">{brand.description}</p>
+                <div className="flex items-center justify-between text-xs">
+                  <Badge variant="outline">{brand.platform}</Badge>
+                  <span className="text-muted-foreground">{brand.views} views</span>
                 </div>
-                <Badge 
-                  variant="outline"
-                  className={brand.sentiment === "positive" 
-                    ? "bg-primary/10 border-primary/30 text-primary" 
-                    : "bg-muted/30 border-muted text-muted-foreground"
-                  }
-                >
-                  {brand.sentiment}
-                </Badge>
               </div>
             ))}
           </div>
