@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, Area, AreaChart } from "recharts";
-import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3 } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3, Star, Target } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -921,56 +921,83 @@ export const SentimentBreakdown = () => {
           </Card>
         </div>
 
-        {/* Influencer Performance Table */}
+        {/* Key Influencers & Complementary Keywords */}
         <Card className="bg-card/50 border-border/50 p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Share2 className="h-5 w-5 text-primary" />
-            <h4 className="text-lg font-bold text-foreground">Influencer Performance Breakdown</h4>
-          </div>
+          <h4 className="text-xl font-bold text-foreground mb-6">Key Influencers & Complementary Keywords</h4>
           
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-3 px-2 text-sm font-semibold text-muted-foreground">Influencer</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Followers</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Engagement Rate</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Posts/Month</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Conversions</th>
-                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">ROI</th>
-                </tr>
-              </thead>
-              <tbody>
-                {influencerData.map((influencer, index) => (
-                  <tr key={index} className="border-b border-border/50 hover:bg-accent/5 transition-colors">
-                    <td className="py-3 px-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Users className="h-4 w-4 text-primary" />
-                        </div>
-                        <span className="font-medium text-foreground">{influencer.name}</span>
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Top Influencers Section */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Star className="h-5 w-5 text-primary" />
+                <h5 className="text-lg font-semibold text-foreground">Top Influencers</h5>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {influencerData.slice(0, 4).map((influencer, index) => {
+                  const gradients = [
+                    'bg-gradient-to-br from-blue-500 to-blue-600',
+                    'bg-gradient-to-br from-purple-500 to-pink-500',
+                    'bg-gradient-to-br from-cyan-400 to-cyan-500',
+                    'bg-gradient-to-br from-green-400 to-green-500'
+                  ];
+                  const sizes = index === 0 ? 'col-span-1 row-span-2' : 'col-span-1';
+                  
+                  return (
+                    <div 
+                      key={index} 
+                      className={`${gradients[index]} ${sizes} rounded-xl p-6 flex flex-col justify-between min-h-[120px] shadow-lg hover:shadow-xl transition-all cursor-pointer group`}
+                    >
+                      <div className="text-white">
+                        <div className="text-lg font-bold mb-1">{influencer.name}</div>
+                        <div className="text-xs opacity-90">{influencer.followers.toLocaleString()} followers</div>
                       </div>
-                    </td>
-                    <td className="text-right py-3 px-2 text-foreground">{influencer.followers.toLocaleString()}</td>
-                    <td className="text-right py-3 px-2">
-                      <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
-                        {calculateEngagementRate(influencer)}%
-                      </Badge>
-                    </td>
-                    <td className="text-right py-3 px-2 text-foreground">{influencer.posts}</td>
-                    <td className="text-right py-3 px-2 text-foreground">{influencer.conversions}</td>
-                    <td className="text-right py-3 px-2">
-                      <Badge variant="outline" className="bg-rising-trend/10 text-rising-trend border-rising-trend/30">
-                        {calculateROI(influencer)}x
-                      </Badge>
-                    </td>
-                  </tr>
+                      <div className="mt-3 space-y-1">
+                        <div className="flex justify-between items-center text-white text-xs">
+                          <span className="opacity-90">Engagement:</span>
+                          <span className="font-semibold">{calculateEngagementRate(influencer)}%</span>
+                        </div>
+                        <div className="flex justify-between items-center text-white text-xs">
+                          <span className="opacity-90">Conversions:</span>
+                          <span className="font-semibold">{influencer.conversions}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-white text-xs">
+                          <span className="opacity-90">ROI:</span>
+                          <span className="font-semibold">{calculateROI(influencer)}x</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Complementary Keywords Section */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Target className="h-5 w-5 text-accent" />
+                <h5 className="text-lg font-semibold text-foreground">Complementary Keywords</h5>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { keyword: 'Skincare Routine', size: 'col-span-2', gradient: 'from-pink-400 to-pink-500' },
+                  { keyword: 'Beauty Tips', size: 'col-span-1', gradient: 'from-rose-500 to-pink-600' },
+                  { keyword: 'Wellness Journey', size: 'col-span-1', gradient: 'from-emerald-400 to-green-500' },
+                  { keyword: 'Self Care', size: 'col-span-2', gradient: 'from-pink-500 to-rose-500' }
+                ].map((item, index) => (
+                  <div 
+                    key={index} 
+                    className={`${item.size} bg-gradient-to-br ${item.gradient} rounded-xl p-6 flex items-center justify-center min-h-[100px] shadow-lg hover:shadow-xl transition-all cursor-pointer group`}
+                  >
+                    <span className="text-white text-lg font-bold text-center">{item.keyword}</span>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-border/50">
+          <div className="mt-6 pt-4 border-t border-border/50">
             <p className="text-xs text-muted-foreground text-center">
               Data source: {selectedPlatform} • Updated in real-time
             </p>
