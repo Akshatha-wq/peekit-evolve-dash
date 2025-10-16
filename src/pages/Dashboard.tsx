@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MetricCard } from "@/components/MetricCard";
 import { GrowthChart } from "@/components/GrowthChart";
@@ -6,74 +5,62 @@ import { InsightCard } from "@/components/InsightCard";
 import { TrendsTable } from "@/components/TrendsTable";
 import { SourceMapping } from "@/components/SourceMapping";
 import { WhitespaceOpportunities } from "@/components/WhitespaceOpportunities";
-import { SentimentBreakdown } from "@/components/SentimentBreakdown";
+import { SentimentCore } from "@/components/sentiment/SentimentCore";
+import { TemporalAnalysis } from "@/components/sentiment/TemporalAnalysis";
+import { GeographySegmentation } from "@/components/sentiment/GeographySegmentation";
+import { InfluencerEngagement } from "@/components/sentiment/InfluencerEngagement";
+import { PredictiveNPS } from "@/components/sentiment/PredictiveNPS";
 import { OverallSummary } from "@/components/OverallSummary";
-import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, ChevronDown, ChevronUp } from "lucide-react";
+import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-
-const SectionHeader = ({ id, title, icon: Icon, isOpen }: { 
-  id: string; 
-  title: string; 
-  icon?: any;
-  isOpen: boolean;
-}) => (
-  <CollapsibleTrigger asChild>
-    <div id={id} className="scroll-mt-24 mb-6 w-full">
-      <Button
-        variant="ghost"
-        className="w-full flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20 hover:bg-transparent p-0 h-auto rounded-none"
-      >
-        <div className="flex items-center gap-3">
-          {Icon && <Icon className="h-6 w-6 text-primary" />}
-          <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            {title}
-          </h2>
-        </div>
-        {isOpen ? (
-          <ChevronUp className="h-5 w-5 text-muted-foreground transition-transform" />
-        ) : (
-          <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform" />
-        )}
-      </Button>
-    </div>
-  </CollapsibleTrigger>
-);
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Dashboard = () => {
-  const [openSections, setOpenSections] = useState({
-    trendOverview: true,
-    trendsTable: true,
-    sourceMapping: true,
-    whitespaceOpportunities: true,
-    sentimentBreakdown: true,
-    overallSummary: true,
-  });
-
-  const toggleSection = (section: keyof typeof openSections) => {
-    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
-  };
 
   return (
     <div className="min-h-screen bg-background">
       <DashboardHeader />
       
-      <main className="container mx-auto px-6 py-8 space-y-8">
-        {/* Trend Overview Section */}
-        <Collapsible
-          open={openSections.trendOverview}
-          onOpenChange={() => toggleSection('trendOverview')}
-        >
-          <section id="trend-overview" className="scroll-mt-24">
-            <SectionHeader 
-              id="trend-overview-header" 
-              title="Trend Overview" 
-              icon={TrendingUp}
-              isOpen={openSections.trendOverview}
-            />
-            
-            <CollapsibleContent className="space-y-8">
+      <main className="container mx-auto px-6 py-8">
+        <Tabs defaultValue="overview" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-5 bg-muted/50 p-1.5 rounded-xl">
+            <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <TrendingUp className="h-4 w-4" />
+              <span className="hidden sm:inline">Overview & Trends</span>
+              <span className="sm:hidden">Overview</span>
+            </TabsTrigger>
+            <TabsTrigger value="whitespace" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <Target className="h-4 w-4" />
+              <span className="hidden sm:inline">Whitespace</span>
+              <span className="sm:hidden">Gaps</span>
+            </TabsTrigger>
+            <TabsTrigger value="sentiment" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <Sparkles className="h-4 w-4" />
+              <span className="hidden sm:inline">Sentiment</span>
+              <span className="sm:hidden">Feel</span>
+            </TabsTrigger>
+            <TabsTrigger value="temporal" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <Globe className="h-4 w-4" />
+              <span className="hidden sm:inline">Temporal & Geo</span>
+              <span className="sm:hidden">Geo</span>
+            </TabsTrigger>
+            <TabsTrigger value="engagement" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <Users className="h-4 w-4" />
+              <span className="hidden sm:inline">Engagement</span>
+              <span className="sm:hidden">Engage</span>
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Tab 1: Overview & Trends */}
+          <TabsContent value="overview" className="space-y-8 animate-fade-in">
+            <section id="trend-overview" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <TrendingUp className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Trend Overview
+                </h2>
+              </div>
+
               {/* Metric Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <MetricCard
@@ -136,102 +123,114 @@ const Dashboard = () => {
                   </div>
                 </Card>
               </div>
-            </CollapsibleContent>
-          </section>
-        </Collapsible>
+            </section>
 
-        {/* Trends Table */}
-        <Collapsible
-          open={openSections.trendsTable}
-          onOpenChange={() => toggleSection('trendsTable')}
-        >
-          <section id="trends-table" className="scroll-mt-24">
-            <SectionHeader 
-              id="trends-table-header" 
-              title="Hot, Rising & Cold Trends" 
-              icon={Flame}
-              isOpen={openSections.trendsTable}
-            />
-            <CollapsibleContent>
+            <section id="trends-table" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Flame className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Hot, Rising & Cold Trends
+                </h2>
+              </div>
               <TrendsTable />
-            </CollapsibleContent>
-          </section>
-        </Collapsible>
+            </section>
 
-        {/* Source Mapping */}
-        <Collapsible
-          open={openSections.sourceMapping}
-          onOpenChange={() => toggleSection('sourceMapping')}
-        >
-          <section id="source-mapping" className="scroll-mt-24">
-            <SectionHeader 
-              id="source-mapping-header" 
-              title="Source Mapping" 
-              icon={MapPin}
-              isOpen={openSections.sourceMapping}
-            />
-            <CollapsibleContent>
+            <section id="source-mapping" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <MapPin className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Source Mapping
+                </h2>
+              </div>
               <SourceMapping />
-            </CollapsibleContent>
-          </section>
-        </Collapsible>
+            </section>
+          </TabsContent>
 
-        {/* Whitespace Opportunities */}
-        <Collapsible
-          open={openSections.whitespaceOpportunities}
-          onOpenChange={() => toggleSection('whitespaceOpportunities')}
-        >
-          <section id="whitespace-opportunities" className="scroll-mt-24">
-            <SectionHeader 
-              id="whitespace-opportunities-header" 
-              title="Whitespace Opportunities" 
-              icon={Target}
-              isOpen={openSections.whitespaceOpportunities}
-            />
-            <CollapsibleContent>
+          {/* Tab 2: Whitespace Opportunities */}
+          <TabsContent value="whitespace" className="space-y-8 animate-fade-in">
+            <section id="whitespace-opportunities" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Target className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Whitespace Opportunities
+                </h2>
+              </div>
               <WhitespaceOpportunities />
-            </CollapsibleContent>
-          </section>
-        </Collapsible>
+            </section>
+          </TabsContent>
 
-        {/* Sentiment Breakdown */}
-        <Collapsible
-          open={openSections.sentimentBreakdown}
-          onOpenChange={() => toggleSection('sentimentBreakdown')}
-        >
-          <section id="sentiment-breakdown" className="scroll-mt-24">
-            <SectionHeader 
-              id="sentiment-breakdown-header" 
-              title="Sentiment Breakdown" 
-              icon={Sparkles}
-              isOpen={openSections.sentimentBreakdown}
-            />
-            <CollapsibleContent>
-              <SentimentBreakdown />
-            </CollapsibleContent>
-          </section>
-        </Collapsible>
+          {/* Tab 3: Sentiment & Analysis */}
+          <TabsContent value="sentiment" className="space-y-8 animate-fade-in">
+            <section id="sentiment-breakdown" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Sparkles className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Sentiment Breakdown
+                </h2>
+              </div>
+              <SentimentCore />
+            </section>
+          </TabsContent>
 
-        {/* Overall Summary */}
-        <Collapsible
-          open={openSections.overallSummary}
-          onOpenChange={() => toggleSection('overallSummary')}
-        >
-          <section id="overall-summary" className="scroll-mt-24">
-            <SectionHeader 
-              id="overall-summary-header" 
-              title="Overall Summary" 
-              icon={Sparkles}
-              isOpen={openSections.overallSummary}
-            />
-            <CollapsibleContent>
+          {/* Tab 4: Temporal & Geographic */}
+          <TabsContent value="temporal" className="space-y-8 animate-fade-in">
+            <section id="temporal-analysis" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Clock className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Temporal Analysis
+                </h2>
+              </div>
+              <TemporalAnalysis />
+            </section>
+
+            <section id="geography-customer-segmentation" className="scroll-mt-24 space-y-6 mt-8">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Globe className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Geography & Customer Segmentation
+                </h2>
+              </div>
+              <GeographySegmentation />
+            </section>
+          </TabsContent>
+
+          {/* Tab 5: Engagement & Predictions */}
+          <TabsContent value="engagement" className="space-y-8 animate-fade-in">
+            <section id="influencer-engagement-analytics" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Users className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Influencer & Engagement Analytics
+                </h2>
+              </div>
+              <InfluencerEngagement />
+            </section>
+
+            <section id="predictive-engagement-nps" className="scroll-mt-24 space-y-6 mt-8">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <BarChart3 className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Predictive Engagement & NPS Modeling
+                </h2>
+              </div>
+              <PredictiveNPS />
+            </section>
+
+            <section id="overall-summary" className="scroll-mt-24 space-y-6 mt-8">
+              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+                <Lightbulb className="h-6 w-6 text-primary" />
+                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  Overall Summary
+                </h2>
+              </div>
               <OverallSummary />
-            </CollapsibleContent>
-          </section>
-        </Collapsible>
+            </section>
+          </TabsContent>
+        </Tabs>
 
         {/* Footer */}
-        <footer className="text-center py-6 text-sm text-muted-foreground border-t border-border/50">
+        <footer className="text-center py-6 text-sm text-muted-foreground border-t border-border/50 mt-8">
           Last updated: 2 minutes ago • AI accuracy: 94.3%
         </footer>
       </main>

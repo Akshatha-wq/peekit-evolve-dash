@@ -12,22 +12,35 @@ import {
 } from "@/components/ui/select";
 
 const navigationSections = [
-  { id: "trend-overview", label: "Trend Overview" },
-  { id: "trends-table", label: "Hot, Rising & Cold Trends" },
-  { id: "source-mapping", label: "Source Mapping" },
-  { id: "whitespace-opportunities", label: "Whitespace Opportunities" },
-  { id: "sentiment-breakdown", label: "Sentiment Breakdown" },
-  { id: "geography-customer-segmentation", label: "Geography & Customer Segmentation" },
-  { id: "temporal-analysis", label: "Temporal Analysis" },
-  { id: "influencer-engagement-analytics", label: "Influencer & Engagement Analytics" },
-  { id: "predictive-engagement-nps", label: "Predictive Engagement & NPS" },
+  { id: "trend-overview", label: "Trend Overview", tab: "overview" },
+  { id: "trends-table", label: "Hot, Rising & Cold Trends", tab: "overview" },
+  { id: "source-mapping", label: "Source Mapping", tab: "overview" },
+  { id: "whitespace-opportunities", label: "Whitespace Opportunities", tab: "whitespace" },
+  { id: "sentiment-breakdown", label: "Sentiment Breakdown", tab: "sentiment" },
+  { id: "temporal-analysis", label: "Temporal Analysis", tab: "temporal" },
+  { id: "geography-customer-segmentation", label: "Geography & Customer Segmentation", tab: "temporal" },
+  { id: "influencer-engagement-analytics", label: "Influencer & Engagement Analytics", tab: "engagement" },
+  { id: "predictive-engagement-nps", label: "Predictive Engagement & NPS", tab: "engagement" },
+  { id: "overall-summary", label: "Overall Summary", tab: "engagement" },
 ];
 
 export const DashboardHeader = () => {
   const handleNavigate = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = navigationSections.find(s => s.id === sectionId);
+    if (section) {
+      // First, click the tab to switch to the correct tab
+      const tabTrigger = document.querySelector(`[value="${section.tab}"]`) as HTMLElement;
+      if (tabTrigger) {
+        tabTrigger.click();
+      }
+      
+      // Then scroll to the section after a short delay to allow tab switch
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
     }
   };
   return (
