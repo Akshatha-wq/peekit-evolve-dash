@@ -123,7 +123,10 @@ export const SentimentBreakdown = () => {
 
       {/* Advanced Sentiment Metrics */}
       <Card className="bg-gradient-card border-border/50 p-6">
-        <h3 className="text-xl font-bold text-foreground mb-6">Advanced Sentiment Metrics</h3>
+        <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
+          <span className="h-px w-8 bg-border"></span>
+          Advanced Metrics
+        </h3>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {/* Sentiment Delta */}
