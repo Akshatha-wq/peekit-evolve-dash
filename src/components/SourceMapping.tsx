@@ -44,9 +44,7 @@ export const SourceMapping = () => {
   };
 
   return (
-    <Card className="bg-gradient-card border-border/50 p-6 animate-slide-up">
-      <h3 className="text-xl font-bold text-foreground mb-6">Source Mapping</h3>
-      
+    <Card className="bg-card/50 border-border/50 p-6 animate-fade-in">
       <div className="grid lg:grid-cols-4 gap-6">
         <div className="lg:col-span-3">
           <ResponsiveContainer width="100%" height={350}>

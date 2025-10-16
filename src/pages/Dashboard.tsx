@@ -7,8 +7,19 @@ import { NewsTicker } from "@/components/NewsTicker";
 import { SourceMapping } from "@/components/SourceMapping";
 import { WhitespaceOpportunities } from "@/components/WhitespaceOpportunities";
 import { SentimentBreakdown } from "@/components/SentimentBreakdown";
-import { Database, Calendar, FileText, Eye, Sparkles } from "lucide-react";
+import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target } from "lucide-react";
 import { Card } from "@/components/ui/card";
+
+const SectionHeader = ({ id, title, icon: Icon }: { id: string; title: string; icon?: any }) => (
+  <div id={id} className="scroll-mt-24 mb-6">
+    <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
+      {Icon && <Icon className="h-6 w-6 text-primary" />}
+      <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+        {title}
+      </h2>
+    </div>
+  </div>
+);
 
 const Dashboard = () => {
   return (
@@ -17,10 +28,8 @@ const Dashboard = () => {
       
       <main className="container mx-auto px-6 py-8 space-y-8">
         {/* Trend Overview Section */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">Trend Overview</span>
-          </h2>
+        <section id="trend-overview" className="scroll-mt-24">
+          <SectionHeader id="trend-overview-header" title="Trend Overview" icon={TrendingUp} />
           
           {/* Metric Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -87,23 +96,26 @@ const Dashboard = () => {
         </section>
 
         {/* Trends Table */}
-        <section>
+        <section id="trends-table" className="scroll-mt-24">
+          <SectionHeader id="trends-table-header" title="Hot, Rising & Cold Trends" icon={Flame} />
           <TrendsTable />
         </section>
 
-
         {/* Source Mapping */}
-        <section>
+        <section id="source-mapping" className="scroll-mt-24">
+          <SectionHeader id="source-mapping-header" title="Source Mapping" icon={MapPin} />
           <SourceMapping />
         </section>
 
         {/* Whitespace Opportunities */}
-        <section>
+        <section id="whitespace-opportunities" className="scroll-mt-24">
+          <SectionHeader id="whitespace-opportunities-header" title="Whitespace Opportunities" icon={Target} />
           <WhitespaceOpportunities />
         </section>
 
         {/* Sentiment Breakdown */}
-        <section>
+        <section id="sentiment-breakdown" className="scroll-mt-24">
+          <SectionHeader id="sentiment-breakdown-header" title="Sentiment Breakdown" icon={Sparkles} />
           <SentimentBreakdown />
         </section>
 

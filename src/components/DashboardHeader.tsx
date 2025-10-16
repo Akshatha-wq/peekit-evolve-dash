@@ -11,7 +11,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const navigationSections = [
+  { id: "trend-overview", label: "Trend Overview" },
+  { id: "trends-table", label: "Hot, Rising & Cold Trends" },
+  { id: "source-mapping", label: "Source Mapping" },
+  { id: "whitespace-opportunities", label: "Whitespace Opportunities" },
+  { id: "sentiment-breakdown", label: "Sentiment Breakdown" },
+];
+
 export const DashboardHeader = () => {
+  const handleNavigate = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   return (
     <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 z-50 animate-fade-in">
       <div className="container mx-auto px-6 py-4">
@@ -100,7 +114,20 @@ export const DashboardHeader = () => {
               </SelectContent>
             </Select>
 
-            <Button 
+            <Select onValueChange={handleNavigate}>
+              <SelectTrigger className="w-[240px] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-border/50">
+                <SelectValue placeholder="Jump to section..." />
+              </SelectTrigger>
+              <SelectContent className="bg-popover/95 backdrop-blur-sm border-border z-50">
+                {navigationSections.map((section) => (
+                  <SelectItem key={section.id} value={section.id}>
+                    {section.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Button
               onClick={() => toast({ 
                 title: "Coming Soon", 
                 description: "PDF download functionality will be available soon." 

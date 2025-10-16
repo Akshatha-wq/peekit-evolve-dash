@@ -137,12 +137,6 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
 export const WhitespaceOpportunities = () => {
   return (
     <div className="space-y-8 animate-fade-in">
-      <div>
-        <h2 className="text-2xl font-bold text-foreground mb-2">Whitespace Opportunities</h2>
-        <p className="text-muted-foreground">
-          White spaces are opportunities for brands to action on. They are ranked by Number of Mention and Engagement
-        </p>
-      </div>
 
       {/* Feature Section */}
       <div className="space-y-4">

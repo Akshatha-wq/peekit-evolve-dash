@@ -67,11 +67,7 @@ const iconColors = {
 
 export const TrendsTable = () => {
   return (
-    <div className="space-y-6 animate-slide-up">
-      <h2 className="text-2xl font-bold text-foreground">
-        Hot, Rising & Cold Trends for Amino Acids
-      </h2>
-
+    <div className="animate-fade-in">
       <Card className="bg-card/50 border-border/50 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">

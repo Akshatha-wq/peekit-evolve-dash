@@ -169,10 +169,8 @@ export const SentimentBreakdown = () => {
   };
 
   return (
-    <div className="space-y-6 animate-slide-up">
-      <h2 className="text-2xl font-bold text-foreground">Sentiment Breakdown</h2>
-
-      <Card className="bg-gradient-card border-border/50 p-6">
+    <div className="space-y-6 animate-fade-in">
+      <Card className="bg-card/50 border-border/50 p-6">
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Audience Voice - Pie Chart */}
           <Card className="bg-card/50 border-border/50 p-6">
