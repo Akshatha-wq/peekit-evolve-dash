@@ -1,6 +1,7 @@
-import { Search, Filter, TrendingUp } from "lucide-react";
+import { Search, Filter, TrendingUp, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 import {
   Select,
   SelectContent,
@@ -49,7 +50,8 @@ export const DashboardHeader = () => {
             </Select>
 
             <Select defaultValue="all">
-              <SelectTrigger className="w-40 bg-background/50 border-border/50">
+              <SelectTrigger className="w-48 bg-background/50 border-border/50">
+                <span className="text-sm font-medium mr-2">Sources:</span>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -60,6 +62,18 @@ export const DashboardHeader = () => {
                 <SelectItem value="tiktok">TikTok</SelectItem>
               </SelectContent>
             </Select>
+
+            <Button 
+              onClick={() => toast({ 
+                title: "Coming Soon", 
+                description: "PDF download functionality will be available soon." 
+              })}
+              variant="outline"
+              className="gap-2 bg-background/50 border-border/50"
+            >
+              <Download className="h-4 w-4" />
+              Download PDF
+            </Button>
           </div>
         </div>
       </div>
