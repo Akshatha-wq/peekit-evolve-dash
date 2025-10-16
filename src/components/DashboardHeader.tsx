@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Search, Filter, Download, TrendingUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,40 @@ const navigationSections = [
 ];
 
 export const DashboardHeader = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Don't hide when at the top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+        setLastScrollY(currentScrollY);
+        return;
+      }
+      
+      // Only trigger if scrolled more than 5px to avoid jitter
+      if (Math.abs(currentScrollY - lastScrollY) < 5) {
+        return;
+      }
+      
+      // Scrolling down - hide header
+      if (currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        // Scrolling up - show header
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   const handleNavigate = (sectionId: string) => {
     const section = navigationSections.find(s => s.id === sectionId);
     if (section) {
@@ -43,8 +78,9 @@ export const DashboardHeader = () => {
       }, 100);
     }
   };
+  
   return (
-    <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 z-50 animate-fade-in">
+    <header className={`border-b border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 z-50 animate-fade-in transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-6 py-4">
         {/* Top Section: Brand + Main Heading */}
         <div className="flex items-center justify-between gap-8 mb-6">
