@@ -91,10 +91,6 @@ const Dashboard = () => {
           <TrendsTable />
         </section>
 
-        {/* News Ticker */}
-        <section>
-          <NewsTicker />
-        </section>
 
         {/* Source Mapping */}
         <section>
