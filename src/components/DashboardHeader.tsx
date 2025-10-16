@@ -17,6 +17,10 @@ const navigationSections = [
   { id: "source-mapping", label: "Source Mapping" },
   { id: "whitespace-opportunities", label: "Whitespace Opportunities" },
   { id: "sentiment-breakdown", label: "Sentiment Breakdown" },
+  { id: "geography-customer-segmentation", label: "Geography & Customer Segmentation" },
+  { id: "temporal-analysis", label: "Temporal Analysis" },
+  { id: "influencer-engagement-analytics", label: "Influencer & Engagement Analytics" },
+  { id: "predictive-engagement-nps", label: "Predictive Engagement & NPS" },
 ];
 
 export const DashboardHeader = () => {

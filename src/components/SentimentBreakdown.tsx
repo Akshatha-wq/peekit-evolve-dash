@@ -361,7 +361,7 @@ export const SentimentBreakdown = () => {
       </Card>
 
       {/* Geography & Customer Segmentation */}
-      <Card className="bg-gradient-card border-border/50 p-6">
+      <Card id="geography-customer-segmentation" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
         <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
           <span className="h-px w-8 bg-border"></span>
           Geography & Customer Segmentation
@@ -589,7 +589,7 @@ export const SentimentBreakdown = () => {
       </Card>
 
       {/* Temporal Analysis Section */}
-      <Card className="bg-gradient-card border-border/50 p-6">
+      <Card id="temporal-analysis" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
         <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
           <span className="h-px w-8 bg-border"></span>
           Temporal Analysis
@@ -833,7 +833,7 @@ export const SentimentBreakdown = () => {
       </Card>
 
       {/* Influencer & Engagement Analytics Section */}
-      <Card className="bg-gradient-card border-border/50 p-6">
+      <Card id="influencer-engagement-analytics" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-muted-foreground flex items-center gap-2">
             <span className="h-px w-8 bg-border"></span>
@@ -1004,7 +1004,7 @@ export const SentimentBreakdown = () => {
       </Card>
 
       {/* Predictive Engagement & NPS Modeling Section */}
-      <Card className="bg-gradient-card border-border/50 p-6">
+      <Card id="predictive-engagement-nps" className="scroll-mt-24 bg-card/50 border-border/50 p-6">
         <h3 className="text-lg font-semibold text-muted-foreground mb-6 flex items-center gap-2">
           <span className="h-px w-8 bg-border"></span>
           Predictive Engagement & NPS Modeling
