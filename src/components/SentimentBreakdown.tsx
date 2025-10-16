@@ -948,17 +948,16 @@ export const SentimentBreakdown = () => {
         open={openSections.influencer}
         onOpenChange={() => toggleSection('influencer')}
       >
-        <div className="flex items-center justify-between w-full">
-          <SectionHeader 
-            id="influencer-engagement-analytics" 
-            title="Influencer & Engagement Analytics" 
-            icon={Users}
-            isOpen={openSections.influencer}
-          />
+        <SectionHeader 
+          id="influencer-engagement-analytics" 
+          title="Influencer & Engagement Analytics" 
+          icon={Users}
+          isOpen={openSections.influencer}
+        />
         
-          <CollapsibleContent>
-            <Card className="bg-card/50 border-border/50 p-6 mb-6">
-              <div className="flex items-center justify-end mb-6">
+        <CollapsibleContent>
+          <Card className="bg-card/50 border-border/50 p-6">
+            <div className="flex items-center justify-end mb-6">
               {/* Platform Selector Dropdown */}
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">Platform:</span>
@@ -977,21 +976,21 @@ export const SentimentBreakdown = () => {
               </div>
             </div>
 
-        {/* Key Metrics Overview */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {/* Average Engagement Rate */}
-          <Card className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <BarChart3 className="h-5 w-5 text-primary" />
-              <h4 className="font-semibold text-foreground">Avg. Engagement Rate</h4>
-            </div>
-            <div className="flex items-baseline gap-2 mt-3">
-              <span className="text-3xl font-bold text-primary">{avgEngagementRate}%</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              (Likes + Comments + Shares) ÷ Followers
-            </p>
-          </Card>
+            {/* Key Metrics Overview */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              {/* Average Engagement Rate */}
+              <Card className="bg-card/50 border-border/50 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <BarChart3 className="h-5 w-5 text-primary" />
+                  <h4 className="font-semibold text-foreground">Avg. Engagement Rate</h4>
+                </div>
+                <div className="flex items-baseline gap-2 mt-3">
+                  <span className="text-3xl font-bold text-primary">{avgEngagementRate}%</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  (Likes + Comments + Shares) ÷ Followers
+                </p>
+              </Card>
 
           {/* Post Longevity */}
           <Card className="bg-card/50 border-border/50 p-4">
@@ -1040,9 +1039,9 @@ export const SentimentBreakdown = () => {
 
         {/* Top Content Section */}
         <Card className="bg-card/50 border-border/50 p-6 mb-6">
-          <h4 className="text-xl font-bold text-foreground mb-6">Top Content</h4>
-          
-          <div className="grid md:grid-cols-3 gap-6">
+              <h4 className="text-xl font-bold text-foreground mb-6">Top Content</h4>
+              
+              <div className="grid md:grid-cols-3 gap-6">
             {/* Most Shared */}
             <div className="space-y-4">
               <div className="flex items-center gap-2">
@@ -1151,21 +1150,21 @@ export const SentimentBreakdown = () => {
               </Card>
             </div>
           </div>
-        </Card>
+            </Card>
 
-        {/* Key Influencers & Complementary Keywords */}
-        <Card className="bg-card/50 border-border/50 p-6">
-          <h4 className="text-xl font-bold text-foreground mb-6">Key Influencers & Complementary Keywords</h4>
-          
-          <div className="grid lg:grid-cols-2 gap-6">
-            {/* Top Influencers Section */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Star className="h-5 w-5 text-primary" />
-                <h5 className="text-lg font-semibold text-foreground">Top Influencers</h5>
-              </div>
+            {/* Key Influencers & Complementary Keywords */}
+            <Card className="bg-card/50 border-border/50 p-6">
+              <h4 className="text-xl font-bold text-foreground mb-6">Key Influencers & Complementary Keywords</h4>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid lg:grid-cols-2 gap-6">
+                {/* Top Influencers Section */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <Star className="h-5 w-5 text-primary" />
+                    <h5 className="text-lg font-semibold text-foreground">Top Influencers</h5>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
                 {influencerData.slice(0, 4).map((influencer, index) => {
                   const gradients = [
                     'bg-gradient-to-br from-blue-500 to-blue-600',
@@ -1201,17 +1200,17 @@ export const SentimentBreakdown = () => {
                     </div>
                   );
                 })}
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            {/* Complementary Keywords Section */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Target className="h-5 w-5 text-accent" />
-                <h5 className="text-lg font-semibold text-foreground">Complementary Keywords</h5>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3">
+                {/* Complementary Keywords Section */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <Target className="h-5 w-5 text-accent" />
+                    <h5 className="text-lg font-semibold text-foreground">Complementary Keywords</h5>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
                 {[
                   { keyword: 'Skincare Routine', size: 'col-span-2', gradient: 'from-pink-400 to-pink-500' },
                   { keyword: 'Beauty Tips', size: 'col-span-1', gradient: 'from-rose-500 to-pink-600' },
@@ -1224,61 +1223,60 @@ export const SentimentBreakdown = () => {
                   >
                     <span className="text-white text-lg font-bold text-center">{item.keyword}</span>
                   </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-6 pt-4 border-t border-border/50">
-            <p className="text-xs text-muted-foreground text-center">
-              Data source: {selectedPlatform} • Updated in real-time
-            </p>
-          </div>
-        </Card>
-
-        {/* Brand Discovery Section */}
-        <Card className="bg-card/50 border-border/50 p-6 mt-6">
-          <h4 className="text-xl font-bold text-foreground mb-2">Brand Discovery</h4>
-          <p className="text-sm text-muted-foreground mb-6">Top Brand discoveries for you</p>
-          
-          <div className="space-y-4">
-            {brandDiscoveries.map((item, index) => (
-              <Card 
-                key={index} 
-                className="bg-gradient-to-br from-card to-muted/30 border-border/50 p-4 hover:border-primary/30 transition-all cursor-pointer group"
-              >
-                <div className="flex items-center gap-4">
-                  {/* Video Thumbnail */}
-                  <div className="flex-shrink-0 w-32 h-20 bg-gradient-to-br from-muted to-card rounded-lg flex items-center justify-center border border-border/50">
-                    <Play className="h-10 w-10 text-muted-foreground/40 group-hover:text-primary/60 transition-colors" />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="flex-1 space-y-2">
-                    <h5 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                      {item.brand}
-                    </h5>
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <Badge variant="outline" className="text-xs">
-                        {item.platform}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Play className="h-3 w-3" />
-                        {item.views} views
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Card>
+            <div className="mt-6 pt-4 border-t border-border/50">
+              <p className="text-xs text-muted-foreground text-center">
+                Data source: {selectedPlatform} • Updated in real-time
+              </p>
+            </div>
             </Card>
-          </CollapsibleContent>
-        </div>
+
+            {/* Brand Discovery Section */}
+            <Card className="bg-card/50 border-border/50 p-6 mt-6">
+              <h4 className="text-xl font-bold text-foreground mb-2">Brand Discovery</h4>
+              <p className="text-sm text-muted-foreground mb-6">Top Brand discoveries for you</p>
+              
+              <div className="space-y-4">
+                {brandDiscoveries.map((item, index) => (
+                  <Card 
+                    key={index} 
+                    className="bg-gradient-to-br from-card to-muted/30 border-border/50 p-4 hover:border-primary/30 transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Video Thumbnail */}
+                      <div className="flex-shrink-0 w-32 h-20 bg-gradient-to-br from-muted to-card rounded-lg flex items-center justify-center border border-border/50">
+                        <Play className="h-10 w-10 text-muted-foreground/40 group-hover:text-primary/60 transition-colors" />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 space-y-2">
+                        <h5 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {item.brand}
+                        </h5>
+                        <p className="text-sm text-muted-foreground">
+                          {item.description}
+                        </p>
+                        <div className="flex items-center gap-3">
+                          <Badge variant="outline" className="text-xs">
+                            {item.platform}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Play className="h-3 w-3" />
+                            {item.views} views
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </Card>
+          </Card>
+        </CollapsibleContent>
       </Collapsible>
 
       {/* Predictive Engagement & NPS Modeling Section */}
