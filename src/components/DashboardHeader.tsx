@@ -14,19 +14,48 @@ import {
 export const DashboardHeader = () => {
   return (
     <header className="border-b border-border/50 bg-card/30 backdrop-blur-sm sticky top-0 z-50 animate-fade-in">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-4">
+        {/* Peekit.ai Branding */}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-3">
+            <img 
+              src={peekitLogo} 
+              alt="Peekit.ai" 
+              className="h-10 w-auto object-contain"
+            />
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">
+                Peekit.ai
+              </h1>
+              <p className="text-xs text-muted-foreground">AI-Powered Trend Discovery & Analytics</p>
+            </div>
+          </div>
+
+          <Button 
+            onClick={() => toast({ 
+              title: "Coming Soon", 
+              description: "PDF download functionality will be available soon." 
+            })}
+            variant="outline"
+            className="gap-2 bg-background border-border/50"
+          >
+            <Download className="h-4 w-4" />
+            Download PDF
+          </Button>
+        </div>
+
         {/* Main Title */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-1">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-bold text-foreground">
             Monitor your product through Social Intelligence
-          </h1>
+          </h2>
         </div>
 
         {/* Product Search Section */}
-        <div className="bg-card/50 border border-border/50 rounded-2xl p-6 mb-6">
+        <div className="bg-card/50 border border-border/50 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">Product Search</h2>
+            <h3 className="text-lg font-semibold text-foreground">Product Search</h3>
           </div>
           
           <div className="flex items-center gap-4">
@@ -78,18 +107,6 @@ export const DashboardHeader = () => {
                 <SelectItem value="tiktok">TikTok</SelectItem>
               </SelectContent>
             </Select>
-
-            <Button 
-              onClick={() => toast({ 
-                title: "Coming Soon", 
-                description: "PDF download functionality will be available soon." 
-              })}
-              variant="outline"
-              className="gap-2 bg-background border-border/50 ml-auto"
-            >
-              <Download className="h-4 w-4" />
-              Download PDF
-            </Button>
           </div>
         </div>
       </div>
