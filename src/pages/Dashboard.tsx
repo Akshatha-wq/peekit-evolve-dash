@@ -6,6 +6,7 @@ import { TrendCategory } from "@/components/TrendCategory";
 import { NewsTicker } from "@/components/NewsTicker";
 import { SourceMapping } from "@/components/SourceMapping";
 import { WhitespaceOpportunities } from "@/components/WhitespaceOpportunities";
+import { SentimentBreakdown } from "@/components/SentimentBreakdown";
 import { Database, Calendar, FileText, Eye, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
@@ -109,6 +110,11 @@ const Dashboard = () => {
         {/* Whitespace Opportunities */}
         <section>
           <WhitespaceOpportunities />
+        </section>
+
+        {/* Sentiment Breakdown */}
+        <section>
+          <SentimentBreakdown />
         </section>
 
         {/* Footer */}
