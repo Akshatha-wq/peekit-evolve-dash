@@ -2,7 +2,7 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { MetricCard } from "@/components/MetricCard";
 import { GrowthChart } from "@/components/GrowthChart";
 import { InsightCard } from "@/components/InsightCard";
-import { TrendCategory } from "@/components/TrendCategory";
+import { TrendsTable } from "@/components/TrendsTable";
 import { NewsTicker } from "@/components/NewsTicker";
 import { SourceMapping } from "@/components/SourceMapping";
 import { WhitespaceOpportunities } from "@/components/WhitespaceOpportunities";
@@ -86,15 +86,9 @@ const Dashboard = () => {
           </div>
         </section>
 
-        {/* Trend Categories */}
-        <section className="space-y-8">
-          <h2 className="text-2xl font-bold">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">Trend Categories</span>
-          </h2>
-          
-          <TrendCategory type="hot" />
-          <TrendCategory type="rising" />
-          <TrendCategory type="cold" />
+        {/* Trends Table */}
+        <section>
+          <TrendsTable />
         </section>
 
         {/* News Ticker */}
