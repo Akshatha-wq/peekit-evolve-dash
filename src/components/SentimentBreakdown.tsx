@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, Area, AreaChart } from "recharts";
-import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Hash, Clock, MapPin, TrendingDown, Calendar, Activity, AlertCircle, Zap, DollarSign, Share2, BarChart3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const sentimentData = [
   { name: "Positive", value: 72, color: "#3B82F6" },
@@ -109,8 +111,33 @@ const peakNegativityWindow = "Monday 9AM - 11AM";
 const campaignTimingEffectiveness = 32.5; // % engagement uplift
 const optimalPostingWindow = "Friday 3PM - 6PM";
 
+// Influencer & Engagement Analytics Data
+const influencerData = [
+  { name: "@TechGuru", followers: 245000, likes: 12340, comments: 890, shares: 567, posts: 8, conversions: 342, cost: 15000 },
+  { name: "@StyleInfluencer", followers: 189000, likes: 9870, comments: 654, shares: 423, posts: 6, conversions: 289, cost: 12000 },
+  { name: "@LifestyleVlogger", followers: 312000, likes: 15600, comments: 1120, shares: 789, posts: 10, conversions: 456, cost: 18000 },
+  { name: "@BeautyExpert", followers: 156000, likes: 8230, comments: 567, shares: 345, posts: 7, conversions: 234, cost: 10000 },
+];
+
+const postLongevity = 5.8; // average days engagement continues
+const avgEngagementRate = 5.6; // average ER across all influencers
+const avgConsistencyIndex = 7.75; // average posts per month per influencer
+const avgInfluencerROI = 2.8; // average ROI
+
+const platforms = ["All Platforms", "Instagram", "YouTube", "Twitter", "TikTok", "LinkedIn"];
 
 export const SentimentBreakdown = () => {
+  const [selectedPlatform, setSelectedPlatform] = useState("All Platforms");
+
+  // Calculate influencer metrics
+  const calculateEngagementRate = (influencer: typeof influencerData[0]) => {
+    return (((influencer.likes + influencer.comments + influencer.shares) / influencer.followers) * 100).toFixed(2);
+  };
+
+  const calculateROI = (influencer: typeof influencerData[0]) => {
+    return (influencer.conversions / influencer.cost).toFixed(2);
+  };
+
   return (
     <div className="space-y-6 animate-slide-up">
       <h2 className="text-2xl font-bold text-foreground">Sentiment Breakdown</h2>
@@ -775,6 +802,150 @@ export const SentimentBreakdown = () => {
             </p>
           </Card>
         </div>
+      </Card>
+
+      {/* Influencer & Engagement Analytics Section */}
+      <Card className="bg-gradient-card border-border/50 p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-semibold text-muted-foreground flex items-center gap-2">
+            <span className="h-px w-8 bg-border"></span>
+            7. Influencer & Engagement Analytics
+          </h3>
+          
+          {/* Platform Selector Dropdown */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">Platform:</span>
+            <Select value={selectedPlatform} onValueChange={setSelectedPlatform}>
+              <SelectTrigger className="w-[180px] bg-card">
+                <SelectValue placeholder="Select platform" />
+              </SelectTrigger>
+              <SelectContent className="bg-popover z-50">
+                {platforms.map((platform) => (
+                  <SelectItem key={platform} value={platform}>
+                    {platform}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Key Metrics Overview */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          {/* Average Engagement Rate */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <BarChart3 className="h-5 w-5 text-primary" />
+              <h4 className="font-semibold text-foreground">Avg. Engagement Rate</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-primary">{avgEngagementRate}%</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              (Likes + Comments + Shares) ÷ Followers
+            </p>
+          </Card>
+
+          {/* Post Longevity */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Clock className="h-5 w-5 text-accent" />
+              <h4 className="font-semibold text-foreground">Post Longevity</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-accent">{postLongevity}</span>
+              <span className="text-sm text-muted-foreground">days</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Average days engagement continues
+            </p>
+          </Card>
+
+          {/* Consistency Index */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Calendar className="h-5 w-5 text-rising-trend" />
+              <h4 className="font-semibold text-foreground">Consistency Index</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-rising-trend">{avgConsistencyIndex}</span>
+              <span className="text-sm text-muted-foreground">posts/mo</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Average posts per month per influencer
+            </p>
+          </Card>
+
+          {/* Average ROI */}
+          <Card className="bg-card/50 border-border/50 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <DollarSign className="h-5 w-5 text-warning" />
+              <h4 className="font-semibold text-foreground">Avg. Influencer ROI</h4>
+            </div>
+            <div className="flex items-baseline gap-2 mt-3">
+              <span className="text-3xl font-bold text-warning">{avgInfluencerROI}x</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Conversions ÷ Cost
+            </p>
+          </Card>
+        </div>
+
+        {/* Influencer Performance Table */}
+        <Card className="bg-card/50 border-border/50 p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Share2 className="h-5 w-5 text-primary" />
+            <h4 className="text-lg font-bold text-foreground">Influencer Performance Breakdown</h4>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-3 px-2 text-sm font-semibold text-muted-foreground">Influencer</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Followers</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Engagement Rate</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Posts/Month</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">Conversions</th>
+                  <th className="text-right py-3 px-2 text-sm font-semibold text-muted-foreground">ROI</th>
+                </tr>
+              </thead>
+              <tbody>
+                {influencerData.map((influencer, index) => (
+                  <tr key={index} className="border-b border-border/50 hover:bg-accent/5 transition-colors">
+                    <td className="py-3 px-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                          <Users className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="font-medium text-foreground">{influencer.name}</span>
+                      </div>
+                    </td>
+                    <td className="text-right py-3 px-2 text-foreground">{influencer.followers.toLocaleString()}</td>
+                    <td className="text-right py-3 px-2">
+                      <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
+                        {calculateEngagementRate(influencer)}%
+                      </Badge>
+                    </td>
+                    <td className="text-right py-3 px-2 text-foreground">{influencer.posts}</td>
+                    <td className="text-right py-3 px-2 text-foreground">{influencer.conversions}</td>
+                    <td className="text-right py-3 px-2">
+                      <Badge variant="outline" className="bg-rising-trend/10 text-rising-trend border-rising-trend/30">
+                        {calculateROI(influencer)}x
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-border/50">
+            <p className="text-xs text-muted-foreground text-center">
+              Data source: {selectedPlatform} • Updated in real-time
+            </p>
+          </div>
+        </Card>
       </Card>
     </div>
   );
