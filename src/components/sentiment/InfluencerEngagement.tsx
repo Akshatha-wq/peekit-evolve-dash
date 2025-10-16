@@ -119,22 +119,48 @@ export const InfluencerEngagement = () => {
         ))}
       </div>
 
-      {/* Top Performing Content */}
+      {/* Top Content */}
       <Card className="bg-card/50 border-border/50 p-6">
-        <h4 className="text-lg font-semibold mb-4 text-foreground">Top Performing Content</h4>
-        <div className="space-y-3">
-          {topContent.map((content, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">{content.title}</p>
-                <p className="text-xs text-muted-foreground">{content.platform} • {content.views} views</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <content.metric.icon className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">{content.metric.value}</span>
-              </div>
-            </div>
-          ))}
+        <h4 className="text-lg font-semibold mb-6 text-foreground flex items-center gap-2">
+          <span className="text-2xl">📄</span> Top Content
+        </h4>
+        <div className="grid lg:grid-cols-3 gap-6">
+          {topContent.map((content, index) => {
+            const categoryName = index === 0 ? "Most Shared" : index === 1 ? "Most Comments" : "Most Likes";
+            const iconColor = index === 0 ? "text-blue-400" : index === 1 ? "text-green-400" : "text-pink-400";
+            const metricColor = index === 0 ? "text-blue-400" : index === 1 ? "text-green-400" : "text-pink-400";
+            
+            return (
+              <Card key={index} className="bg-gradient-to-br from-card/80 to-card/40 border-border/30 p-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <content.metric.icon className={`h-5 w-5 ${iconColor}`} />
+                  <h5 className="text-sm font-semibold text-foreground">{categoryName}</h5>
+                </div>
+                
+                {/* Video Placeholder */}
+                <div className="bg-background/80 rounded-lg aspect-video flex items-center justify-center mb-3 border border-border/20">
+                  <svg className="w-16 h-16 text-muted-foreground/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+                
+                {/* Content Details */}
+                <p className="text-sm font-medium text-foreground mb-2">{content.title}</p>
+                <div className="flex items-center justify-between mb-3">
+                  <Badge variant="outline" className="text-xs">{content.platform}</Badge>
+                  <span className="text-xs text-muted-foreground">{content.views} views</span>
+                </div>
+                
+                {/* Metric */}
+                <div className="flex items-center gap-2">
+                  <content.metric.icon className={`h-4 w-4 ${iconColor}`} />
+                  <span className={`text-sm font-semibold ${metricColor}`}>
+                    {content.metric.value} {content.metric.label}
+                  </span>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </Card>
 
