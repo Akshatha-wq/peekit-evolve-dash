@@ -131,19 +131,6 @@ export const DashboardHeader = () => {
               </SelectContent>
             </Select>
 
-            <Select onValueChange={handleNavigate}>
-              <SelectTrigger className="w-[240px] bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-border/50">
-                <SelectValue placeholder="Jump to section..." />
-              </SelectTrigger>
-              <SelectContent className="bg-popover/95 backdrop-blur-sm border-border z-50">
-                {navigationSections.map((section) => (
-                  <SelectItem key={section.id} value={section.id}>
-                    {section.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
             <Button
               onClick={() => toast({ 
                 title: "Coming Soon", 
