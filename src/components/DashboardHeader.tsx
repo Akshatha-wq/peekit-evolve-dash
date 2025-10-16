@@ -1,7 +1,8 @@
-import { Search, Filter, TrendingUp, Download } from "lucide-react";
+import { Search, Filter, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import peekitLogo from "@/assets/peekit-logo.jpeg";
 import {
   Select,
   SelectContent,
@@ -16,12 +17,14 @@ export const DashboardHeader = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-primary">
-              <TrendingUp className="h-6 w-6 text-primary-foreground" />
-            </div>
+            <img 
+              src={peekitLogo} 
+              alt="Peekit.ai" 
+              className="h-10 w-auto object-contain"
+            />
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Trend Intelligence
+              <h1 className="text-2xl font-bold text-foreground">
+                Peekit.ai
               </h1>
               <p className="text-xs text-muted-foreground">AI-Powered Trend Discovery & Analytics</p>
             </div>
