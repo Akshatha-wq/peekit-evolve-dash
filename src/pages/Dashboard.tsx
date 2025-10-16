@@ -3,6 +3,9 @@ import { MetricCard } from "@/components/MetricCard";
 import { GrowthChart } from "@/components/GrowthChart";
 import { InsightCard } from "@/components/InsightCard";
 import { TrendCategory } from "@/components/TrendCategory";
+import { NewsTicker } from "@/components/NewsTicker";
+import { SourceMapping } from "@/components/SourceMapping";
+import { WhitespaceOpportunities } from "@/components/WhitespaceOpportunities";
 import { Database, Calendar, FileText, Eye, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
@@ -91,6 +94,21 @@ const Dashboard = () => {
           <TrendCategory type="hot" />
           <TrendCategory type="rising" />
           <TrendCategory type="cold" />
+        </section>
+
+        {/* News Ticker */}
+        <section>
+          <NewsTicker />
+        </section>
+
+        {/* Source Mapping */}
+        <section>
+          <SourceMapping />
+        </section>
+
+        {/* Whitespace Opportunities */}
+        <section>
+          <WhitespaceOpportunities />
         </section>
 
         {/* Footer */}
