@@ -3,10 +3,10 @@ import { MetricCard } from "@/components/MetricCard";
 import { GrowthChart } from "@/components/GrowthChart";
 import { InsightCard } from "@/components/InsightCard";
 import { TrendsTable } from "@/components/TrendsTable";
-import { NewsTicker } from "@/components/NewsTicker";
 import { SourceMapping } from "@/components/SourceMapping";
 import { WhitespaceOpportunities } from "@/components/WhitespaceOpportunities";
 import { SentimentBreakdown } from "@/components/SentimentBreakdown";
+import { OverallSummary } from "@/components/OverallSummary";
 import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
@@ -117,6 +117,12 @@ const Dashboard = () => {
         <section id="sentiment-breakdown" className="scroll-mt-24">
           <SectionHeader id="sentiment-breakdown-header" title="Sentiment Breakdown" icon={Sparkles} />
           <SentimentBreakdown />
+        </section>
+
+        {/* Overall Summary */}
+        <section id="overall-summary" className="scroll-mt-24">
+          <SectionHeader id="overall-summary-header" title="Overall Summary" icon={Sparkles} />
+          <OverallSummary />
         </section>
 
         {/* Footer */}
