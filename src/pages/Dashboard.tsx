@@ -24,7 +24,7 @@ const Dashboard = () => {
       
       <main className="container mx-auto px-6 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 bg-muted/50 p-1.5 rounded-xl">
+          <TabsList className="grid w-full grid-cols-6 bg-muted/50 p-1.5 rounded-xl">
             <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <TrendingUp className="h-4 w-4" />
               <span className="hidden sm:inline">Overview & Trends</span>
@@ -49,6 +49,11 @@ const Dashboard = () => {
               <Users className="h-4 w-4" />
               <span className="hidden sm:inline">Engagement</span>
               <span className="sm:hidden">Engage</span>
+            </TabsTrigger>
+            <TabsTrigger value="predictive" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <BarChart3 className="h-4 w-4" />
+              <span className="hidden sm:inline">Predictive NPS</span>
+              <span className="sm:hidden">NPS</span>
             </TabsTrigger>
           </TabsList>
 
@@ -230,7 +235,7 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 5: Engagement & Predictions */}
+          {/* Tab 5: Engagement */}
           <TabsContent value="engagement" className="space-y-8 animate-fade-in">
             <section id="influencer-engagement-analytics" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
@@ -244,8 +249,11 @@ const Dashboard = () => {
               </div>
               <InfluencerEngagement />
             </section>
+          </TabsContent>
 
-            <section id="predictive-engagement-nps" className="scroll-mt-24 space-y-6 mt-8">
+          {/* Tab 6: Predictive NPS */}
+          <TabsContent value="predictive" className="space-y-8 animate-fade-in">
+            <section id="predictive-engagement-nps" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
                 <div className="flex items-center gap-3">
                   <BarChart3 className="h-6 w-6 text-primary" />
@@ -257,7 +265,6 @@ const Dashboard = () => {
               </div>
               <PredictiveNPS />
             </section>
-
           </TabsContent>
         </Tabs>
 
