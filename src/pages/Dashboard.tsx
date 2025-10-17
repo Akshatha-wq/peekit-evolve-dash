@@ -11,6 +11,7 @@ import { GeographySegmentation } from "@/components/sentiment/GeographySegmentat
 import { InfluencerEngagement } from "@/components/sentiment/InfluencerEngagement";
 import { PredictiveNPS } from "@/components/sentiment/PredictiveNPS";
 import { OverallSummary } from "@/components/OverallSummary";
+import { SectionFeedback } from "@/components/SectionFeedback";
 import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -54,11 +55,14 @@ const Dashboard = () => {
           {/* Tab 1: Overview & Trends */}
           <TabsContent value="overview" className="space-y-8 animate-fade-in">
             <section id="trend-overview" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <TrendingUp className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Trend Overview
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <TrendingUp className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Trend Overview
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Trend Overview" />
               </div>
 
               {/* Metric Cards */}
@@ -126,31 +130,40 @@ const Dashboard = () => {
             </section>
 
             <section id="trends-table" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Flame className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Hot, Rising & Cold Trends
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Flame className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Hot, Rising & Cold Trends
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Hot, Rising & Cold Trends" />
               </div>
               <TrendsTable />
             </section>
 
             <section id="source-mapping" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <MapPin className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Source Mapping
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Source Mapping
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Source Mapping" />
               </div>
               <SourceMapping />
             </section>
 
             <section id="overall-summary" className="scroll-mt-24 space-y-6 mt-8">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Lightbulb className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Overall Summary
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Lightbulb className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Overall Summary
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Overall Summary" />
               </div>
               <OverallSummary />
             </section>
@@ -159,11 +172,14 @@ const Dashboard = () => {
           {/* Tab 2: Whitespace Opportunities */}
           <TabsContent value="whitespace" className="space-y-8 animate-fade-in">
             <section id="whitespace-opportunities" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Target className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Whitespace Opportunities
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Target className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Whitespace Opportunities
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Whitespace Opportunities" />
               </div>
               <WhitespaceOpportunities />
             </section>
@@ -172,11 +188,14 @@ const Dashboard = () => {
           {/* Tab 3: Sentiment & Analysis */}
           <TabsContent value="sentiment" className="space-y-8 animate-fade-in">
             <section id="sentiment-breakdown" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Sparkles className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Sentiment Breakdown
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Sparkles className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Sentiment Breakdown
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Sentiment Breakdown" />
               </div>
               <SentimentCore />
             </section>
@@ -185,21 +204,27 @@ const Dashboard = () => {
           {/* Tab 4: Temporal & Geographic */}
           <TabsContent value="temporal" className="space-y-8 animate-fade-in">
             <section id="temporal-analysis" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Clock className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Temporal Analysis
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Clock className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Temporal Analysis
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Temporal Analysis" />
               </div>
               <TemporalAnalysis />
             </section>
 
             <section id="geography-customer-segmentation" className="scroll-mt-24 space-y-6 mt-8">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Globe className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Geography & Customer Segmentation
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Globe className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Geography & Customer Segmentation
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Geography & Customer Segmentation" />
               </div>
               <GeographySegmentation />
             </section>
@@ -208,21 +233,27 @@ const Dashboard = () => {
           {/* Tab 5: Engagement & Predictions */}
           <TabsContent value="engagement" className="space-y-8 animate-fade-in">
             <section id="influencer-engagement-analytics" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <Users className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Influencer & Engagement Analytics
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Users className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Influencer & Engagement Analytics
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Influencer & Engagement Analytics" />
               </div>
               <InfluencerEngagement />
             </section>
 
             <section id="predictive-engagement-nps" className="scroll-mt-24 space-y-6 mt-8">
-              <div className="flex items-center gap-3 pb-3 border-b-2 border-primary/20">
-                <BarChart3 className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Predictive Engagement & NPS Modeling
-                </h2>
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <BarChart3 className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Predictive Engagement & NPS Modeling
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Predictive Engagement & NPS Modeling" />
               </div>
               <PredictiveNPS />
             </section>
