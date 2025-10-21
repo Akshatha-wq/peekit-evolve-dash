@@ -2,12 +2,12 @@ import { Card } from "@/components/ui/card";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const npsComparisonData = [
-  { month: "Jan", predicted: 38, actual: 40 },
-  { month: "Feb", predicted: 41, actual: 42 },
-  { month: "Mar", predicted: 43, actual: 44 },
-  { month: "Apr", predicted: 42, actual: 45 },
-  { month: "May", predicted: 45, actual: 46 },
-  { month: "Jun", predicted: 44, actual: 43 },
+  { month: "Jan", socialListening: 38, companyHistorical: 40 },
+  { month: "Feb", socialListening: 41, companyHistorical: 42 },
+  { month: "Mar", socialListening: 43, companyHistorical: 44 },
+  { month: "Apr", socialListening: 42, companyHistorical: 45 },
+  { month: "May", socialListening: 45, companyHistorical: 46 },
+  { month: "Jun", socialListening: 44, companyHistorical: 43 },
 ];
 
 const npsSegmentData = [
@@ -34,9 +34,9 @@ export const PredictiveNPS = () => {
       {/* NPS Prediction vs Actual */}
       <Card className="bg-card/50 border-border/50 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h4 className="text-lg font-semibold text-foreground">NPS: Predicted vs Actual</h4>
+          <h4 className="text-lg font-semibold text-foreground">NPS: Social Listening vs Company Historical Data</h4>
           <div className="text-right">
-            <p className="text-xs text-muted-foreground">Prediction Accuracy</p>
+            <p className="text-xs text-muted-foreground">Data Accuracy</p>
             <p className="text-lg font-bold text-primary">{predictionAccuracy}%</p>
           </div>
         </div>
@@ -47,8 +47,8 @@ export const PredictiveNPS = () => {
             <YAxis stroke="hsl(var(--muted-foreground))" />
             <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }} />
             <Legend />
-            <Line type="monotone" dataKey="predicted" stroke="hsl(var(--primary))" strokeWidth={2} strokeDasharray="5 5" />
-            <Line type="monotone" dataKey="actual" stroke="hsl(var(--primary))" strokeWidth={2} />
+            <Line type="monotone" dataKey="socialListening" name="Social Listening" stroke="hsl(var(--primary))" strokeWidth={2} strokeDasharray="5 5" />
+            <Line type="monotone" dataKey="companyHistorical" name="Company Historical" stroke="hsl(var(--primary))" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </Card>
