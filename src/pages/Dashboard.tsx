@@ -1,6 +1,6 @@
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MetricCard } from "@/components/MetricCard";
-import { GrowthChart } from "@/components/GrowthChart";
+
 import { InsightCard } from "@/components/InsightCard";
 import { TrendsTable } from "@/components/TrendsTable";
 import { SourceMapping } from "@/components/SourceMapping";
@@ -102,36 +102,6 @@ const Dashboard = () => {
                 />
               </div>
 
-              {/* Growth Chart and Insights */}
-              <div className="grid lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
-                  <GrowthChart />
-                </div>
-                
-                <Card className="bg-gradient-card border-border/50 p-6 animate-slide-up">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Sparkles className="h-5 w-5 text-accent" />
-                    <h3 className="text-lg font-bold text-foreground">Key Insights</h3>
-                  </div>
-                  <div className="space-y-3">
-                    <InsightCard
-                      type="upward"
-                      title="Strong upward trend"
-                      description="42% growth over 6 months with accelerating momentum"
-                    />
-                    <InsightCard
-                      type="prediction"
-                      title="AI predicts"
-                      description="6-8% additional growth expected next month based on trajectory"
-                    />
-                    <InsightCard
-                      type="peak"
-                      title="Peak performance"
-                      description="October shows highest engagement, ideal for campaigns"
-                    />
-                  </div>
-                </Card>
-              </div>
             </section>
 
             <section id="trends-table" className="scroll-mt-24 space-y-6">
