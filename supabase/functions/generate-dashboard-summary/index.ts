@@ -19,13 +19,14 @@ serve(async (req) => {
     }
 
     const systemPrompt = `You are an expert data analyst specializing in social media trends and market intelligence. 
-Your task is to analyze dashboard data and provide a concise, insightful summary that highlights:
-- Key trends and patterns across platforms
-- Notable sentiment insights
-- Important opportunities for brand growth
-- Critical metrics and their implications
+Your task is to analyze dashboard data and provide a concise summary in the form of 8 focused bullet points.
+Each point should:
+- Be clear, actionable, and data-driven
+- Highlight key metrics, trends, or strategic insights
+- Be 1-2 sentences maximum
+- Focus on insights valuable for marketing and product strategy decisions
 
-Keep your summary professional, data-driven, and actionable. Focus on insights that would be valuable for marketing and product strategy decisions.`;
+Return ONLY the bullet points without numbering, bullets, or extra formatting. Each point should be on a new line.`;
 
     const userPrompt = `Based on the following dashboard metrics for a product (Amino Acids in skincare/supplements), provide a comprehensive executive summary:
 
@@ -69,7 +70,7 @@ Predictive Insights:
 - Predicted NPS: 42, Actual: 45 (93.5% accuracy)
 - 76.3% early detractor detection rate
 
-Please provide a 3-4 paragraph executive summary highlighting the most important insights and actionable recommendations.`;
+Please provide 8 focused bullet points highlighting the most important insights and actionable recommendations. Return only the points, no numbering or bullet characters.`;
 
     console.log('Calling Lovable AI Gateway...');
     

@@ -1,14 +1,17 @@
 import { Card } from "@/components/ui/card";
-import { Sparkles } from "lucide-react";
+import { Sparkles, CheckCircle2 } from "lucide-react";
 
 export const OverallSummary = () => {
-  const summary = `The Amino Acids market demonstrates exceptional growth momentum with a 42% increase over the past six months, driven primarily by strong performance across Instagram, TikTok, and YouTube platforms. The 8.3M total reach from 12.5K analyzed posts indicates robust organic engagement, particularly around skin barrier repair and health education content. The sentiment analysis reveals overwhelmingly positive reception (72%), with users consistently praising product efficacy and ease of use, though battery life and maintenance concerns present minor friction points.
-
-Geographic analysis highlights significant regional opportunities, particularly in Maharashtra (8.2 sentiment score) and Kerala (8.1), both showing strong positive sentiment and high conversion potential. The temporal patterns suggest optimal campaign timing during Friday afternoons (3PM-6PM), while Monday morning negativity spikes should inform customer service resource allocation. The 5.8-day post longevity and 5.6% average engagement rate demonstrate sustained audience interest beyond initial posting.
-
-Whitespace analysis identifies three high-potential growth vectors: Sustainable Tech Gadgets (+156% trend, 94% engagement), Home Workout Equipment (+142% trend), and Organic Adaptogens (+134% trend). These categories align well with current consumer wellness trends and offer strategic product expansion opportunities. The influencer landscape shows healthy ROI (2.8x average) with strong consistency metrics, suggesting partnership programs are delivering measurable value.
-
-Predictive modeling accuracy of 93.5% and 76.3% early detractor detection rate provide confidence in forecasting capabilities. The actual NPS of 45 exceeding predicted 42 indicates improving brand perception. Strategic recommendations include: capitalizing on the Friday engagement window for major campaigns, developing products addressing the identified whitespace opportunities, and strengthening presence in high-sentiment geographic markets while addressing conversion gaps in regions showing positive sentiment but lower transaction rates.`;
+  const focusPointers = [
+    "42% growth momentum driven by Instagram, TikTok, and YouTube platforms with 8.3M total reach from 12.5K analyzed posts",
+    "72% positive sentiment with strong user praise for product efficacy and ease of use; battery life and maintenance present minor friction points",
+    "High-potential geographic markets: Maharashtra (8.2) and Kerala (8.1) showing strong sentiment and conversion opportunity",
+    "Optimal campaign timing: Friday afternoons (3PM-6PM) for peak engagement; Monday morning negativity spikes require customer service focus",
+    "Three whitespace growth vectors identified: Sustainable Tech Gadgets (+156%), Home Workout Equipment (+142%), and Organic Adaptogens (+134%)",
+    "Influencer partnerships delivering 2.8x ROI with 5.6% engagement rate and 5.8-day post longevity",
+    "Predictive modeling shows 93.5% accuracy with actual NPS (45) exceeding predicted (42), indicating improving brand perception",
+    "Strategic priorities: capitalize on Friday engagement windows, develop whitespace products, and strengthen presence in high-sentiment markets"
+  ];
 
   return (
     <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20 p-8 animate-fade-in">
@@ -26,10 +29,13 @@ Predictive modeling accuracy of 93.5% and 76.3% early detractor detection rate p
         </div>
       </div>
 
-      <div className="prose prose-sm max-w-none">
-        <div className="bg-card/50 border border-border/50 rounded-lg p-6 text-foreground leading-relaxed whitespace-pre-wrap">
-          {summary}
-        </div>
+      <div className="space-y-3">
+        {focusPointers.map((pointer, index) => (
+          <div key={index} className="flex gap-3 bg-card/50 border border-border/50 rounded-lg p-4 hover:border-primary/30 transition-colors">
+            <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+            <p className="text-foreground leading-relaxed">{pointer}</p>
+          </div>
+        ))}
       </div>
       
       <div className="mt-4 pt-4 border-t border-border/50">
