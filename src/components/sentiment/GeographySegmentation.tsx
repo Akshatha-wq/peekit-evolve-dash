@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { MapPin, Hash, Users, TrendingUp } from "lucide-react";
+import { MapPin, Hash, Users, TrendingUp, ChevronLeft } from "lucide-react";
+import { useState } from "react";
 
 const allRegionalSentimentData = [
   { region: "Maharashtra", sentimentScore: 8.2, volume: 2845 },
@@ -39,9 +41,101 @@ const regionalConversionOpportunity = [
   { region: "West Bengal", positiveSentiment: 65, transactionRate: 28 },
 ];
 
+// District-level data for each state
+const districtData: Record<string, Array<{ district: string; sentimentScore: number; volume: number }>> = {
+  "Maharashtra": [
+    { district: "Mumbai", sentimentScore: 8.5, volume: 945 },
+    { district: "Pune", sentimentScore: 8.3, volume: 678 },
+    { district: "Nagpur", sentimentScore: 7.9, volume: 456 },
+    { district: "Nashik", sentimentScore: 7.8, volume: 389 },
+    { district: "Thane", sentimentScore: 8.1, volume: 377 },
+  ],
+  "Karnataka": [
+    { district: "Bangalore Urban", sentimentScore: 8.2, volume: 823 },
+    { district: "Mysore", sentimentScore: 7.8, volume: 445 },
+    { district: "Mangalore", sentimentScore: 7.7, volume: 356 },
+    { district: "Hubli", sentimentScore: 7.6, volume: 298 },
+    { district: "Belgaum", sentimentScore: 7.9, volume: 212 },
+  ],
+  "Delhi": [
+    { district: "Central Delhi", sentimentScore: 7.8, volume: 534 },
+    { district: "South Delhi", sentimentScore: 7.6, volume: 487 },
+    { district: "West Delhi", sentimentScore: 7.4, volume: 398 },
+    { district: "East Delhi", sentimentScore: 7.2, volume: 312 },
+    { district: "North Delhi", sentimentScore: 7.5, volume: 192 },
+  ],
+  "Tamil Nadu": [
+    { district: "Chennai", sentimentScore: 8.3, volume: 623 },
+    { district: "Coimbatore", sentimentScore: 7.9, volume: 434 },
+    { district: "Madurai", sentimentScore: 7.8, volume: 321 },
+    { district: "Tiruchirappalli", sentimentScore: 7.7, volume: 178 },
+    { district: "Salem", sentimentScore: 8.0, volume: 122 },
+  ],
+  "West Bengal": [
+    { district: "Kolkata", sentimentScore: 7.2, volume: 456 },
+    { district: "Howrah", sentimentScore: 6.8, volume: 298 },
+    { district: "Darjeeling", sentimentScore: 6.5, volume: 198 },
+    { district: "Siliguri", sentimentScore: 6.7, volume: 167 },
+    { district: "Durgapur", sentimentScore: 6.6, volume: 115 },
+  ],
+  "Gujarat": [
+    { district: "Ahmedabad", sentimentScore: 8.1, volume: 567 },
+    { district: "Surat", sentimentScore: 7.9, volume: 423 },
+    { district: "Vadodara", sentimentScore: 7.7, volume: 256 },
+    { district: "Rajkot", sentimentScore: 7.6, volume: 145 },
+    { district: "Gandhinagar", sentimentScore: 7.8, volume: 65 },
+  ],
+  "Rajasthan": [
+    { district: "Jaipur", sentimentScore: 7.5, volume: 378 },
+    { district: "Jodhpur", sentimentScore: 7.2, volume: 234 },
+    { district: "Udaipur", sentimentScore: 7.1, volume: 187 },
+    { district: "Kota", sentimentScore: 7.0, volume: 123 },
+    { district: "Ajmer", sentimentScore: 7.3, volume: 65 },
+  ],
+  "Uttar Pradesh": [
+    { district: "Lucknow", sentimentScore: 6.8, volume: 467 },
+    { district: "Noida", sentimentScore: 6.7, volume: 398 },
+    { district: "Kanpur", sentimentScore: 6.5, volume: 312 },
+    { district: "Varanasi", sentimentScore: 6.4, volume: 234 },
+    { district: "Agra", sentimentScore: 6.3, volume: 156 },
+  ],
+  "Madhya Pradesh": [
+    { district: "Indore", sentimentScore: 7.4, volume: 423 },
+    { district: "Bhopal", sentimentScore: 7.2, volume: 356 },
+    { district: "Jabalpur", sentimentScore: 7.0, volume: 189 },
+    { district: "Gwalior", sentimentScore: 6.9, volume: 98 },
+    { district: "Ujjain", sentimentScore: 7.1, volume: 57 },
+  ],
+  "Kerala": [
+    { district: "Thiruvananthapuram", sentimentScore: 8.3, volume: 298 },
+    { district: "Kochi", sentimentScore: 8.2, volume: 267 },
+    { district: "Kozhikode", sentimentScore: 8.0, volume: 189 },
+    { district: "Thrissur", sentimentScore: 7.9, volume: 123 },
+    { district: "Kannur", sentimentScore: 8.1, volume: 57 },
+  ],
+  "Telangana": [
+    { district: "Hyderabad", sentimentScore: 7.9, volume: 823 },
+    { district: "Warangal", sentimentScore: 7.6, volume: 234 },
+    { district: "Nizamabad", sentimentScore: 7.5, volume: 156 },
+    { district: "Khammam", sentimentScore: 7.7, volume: 89 },
+    { district: "Karimnagar", sentimentScore: 7.4, volume: 43 },
+  ],
+  "Punjab": [
+    { district: "Ludhiana", sentimentScore: 7.5, volume: 298 },
+    { district: "Amritsar", sentimentScore: 7.4, volume: 234 },
+    { district: "Jalandhar", sentimentScore: 7.2, volume: 167 },
+    { district: "Patiala", sentimentScore: 7.1, volume: 112 },
+    { district: "Bathinda", sentimentScore: 7.3, volume: 65 },
+  ],
+};
 
 
 export const GeographySegmentation = () => {
+  const [selectedState, setSelectedState] = useState<string | null>(null);
+  
+  const displayData = selectedState 
+    ? districtData[selectedState] || []
+    : regionalSentimentData;
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="grid lg:grid-cols-2 gap-6">
@@ -50,25 +144,48 @@ export const GeographySegmentation = () => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <MapPin className="h-5 w-5 text-primary" />
-              <h4 className="text-lg font-bold text-foreground">Regional Sentiment Index</h4>
+              <h4 className="text-lg font-bold text-foreground">
+                {selectedState ? `${selectedState} - District Level` : 'Regional Sentiment Index'}
+              </h4>
             </div>
-            <div className="text-xs text-muted-foreground">Top 8 Regions</div>
+            <div className="flex items-center gap-2">
+              {selectedState && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => setSelectedState(null)}
+                  className="gap-1"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Back to States
+                </Button>
+              )}
+              <div className="text-xs text-muted-foreground">
+                {selectedState ? 'Top 5 Districts' : 'Top 8 Regions'}
+              </div>
+            </div>
           </div>
           <ResponsiveContainer width="100%" height={360}>
             <BarChart 
-              data={regionalSentimentData} 
+              data={displayData} 
               layout="horizontal" 
               margin={{ top: 10, right: 30, left: 0, bottom: 60 }}
+              onClick={(data) => {
+                if (data && data.activeLabel && !selectedState) {
+                  setSelectedState(data.activeLabel);
+                }
+              }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
               <XAxis 
-                dataKey="region" 
+                dataKey={selectedState ? "district" : "region"}
                 angle={-45} 
                 textAnchor="end" 
                 height={100}
                 interval={0}
                 stroke="hsl(var(--muted-foreground))"
                 tick={{ fontSize: 12 }}
+                style={{ cursor: selectedState ? 'default' : 'pointer' }}
               />
               <YAxis 
                 domain={[0, 10]} 
@@ -96,9 +213,13 @@ export const GeographySegmentation = () => {
                 dataKey="sentimentScore" 
                 radius={[4, 4, 0, 0]}
                 maxBarSize={60}
+                style={{ cursor: selectedState ? 'default' : 'pointer' }}
               >
-                {regionalSentimentData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={getSentimentColor(entry.sentimentScore)} />
+                {displayData.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={getSentimentColor(entry.sentimentScore)}
+                  />
                 ))}
               </Bar>
             </BarChart>
@@ -119,6 +240,13 @@ export const GeographySegmentation = () => {
               <span className="text-xs text-muted-foreground">Low (&lt;6.5)</span>
             </div>
           </div>
+          {!selectedState && (
+            <div className="mt-4 p-3 bg-primary/5 border border-primary/20 rounded-lg">
+              <p className="text-xs text-muted-foreground text-center">
+                💡 Click on any state bar to view district-level breakdown
+              </p>
+            </div>
+          )}
         </Card>
 
         {/* Volume by Geography */}
