@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { ThumbsUp, ThumbsDown, Check, X, TrendingUp, Scale, Users, GitCompare, Clock } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Check, X, TrendingUp } from "lucide-react";
 
 const sentimentData = [
   { name: "Positive", value: 72, color: "#3B82F6" },
@@ -25,10 +25,6 @@ const negativeKeywords = [
 ];
 
 const sentimentDelta = 12.5;
-const sentimentScore = 7.8;
-const shareOfVoice = 34.2;
-const sentimentDifferentialIndex = { ourBrand: 7.8, competitor: 6.2 };
-const responseTimeToNegativity = 4.2;
 
 export const SentimentCore = () => {
   return (
@@ -137,7 +133,7 @@ export const SentimentCore = () => {
           Advanced Metrics
         </h3>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div className="grid md:grid-cols-1 gap-4 mb-6">
           {/* Sentiment Delta */}
           <Card className="bg-card/50 border-border/50 p-4">
             <div className="flex items-center justify-between mb-2">
@@ -150,75 +146,6 @@ export const SentimentCore = () => {
               <span className="text-3xl font-bold text-rising-trend">+{sentimentDelta}%</span>
               <span className="text-sm text-muted-foreground">vs. last period</span>
             </div>
-          </Card>
-
-          {/* Sentiment Score */}
-          <Card className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <Scale className="h-5 w-5 text-primary" />
-                <h4 className="font-semibold text-foreground">Sentiment Score</h4>
-              </div>
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-primary">{sentimentScore}</span>
-              <span className="text-sm text-muted-foreground">/ 10</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">Weighted average</p>
-          </Card>
-
-          {/* Share of Voice */}
-          <Card className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-accent" />
-                <h4 className="font-semibold text-foreground">Share of Voice</h4>
-              </div>
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-accent">{shareOfVoice}%</span>
-              <span className="text-sm text-muted-foreground">market share</span>
-            </div>
-          </Card>
-
-          {/* Sentiment Differential Index */}
-          <Card className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <GitCompare className="h-5 w-5 text-secondary" />
-                <h4 className="font-semibold text-foreground">Sentiment Differential</h4>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Our Brand</span>
-                <span className="text-lg font-bold text-rising-trend">{sentimentDifferentialIndex.ourBrand}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Competitor</span>
-                <span className="text-lg font-bold text-muted-foreground">{sentimentDifferentialIndex.competitor}</span>
-              </div>
-              <div className="pt-2 border-t border-border/50">
-                <span className="text-xs font-semibold text-rising-trend">
-                  +{(sentimentDifferentialIndex.ourBrand - sentimentDifferentialIndex.competitor).toFixed(1)} advantage
-                </span>
-              </div>
-            </div>
-          </Card>
-
-          {/* Response Time to Negativity */}
-          <Card className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-warning" />
-                <h4 className="font-semibold text-foreground">Response Time</h4>
-              </div>
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-foreground">{responseTimeToNegativity}</span>
-              <span className="text-sm text-muted-foreground">hours avg.</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">To negative mentions</p>
           </Card>
         </div>
       </Card>
