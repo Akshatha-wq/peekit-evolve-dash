@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Flame, TrendingUp, Snowflake, Instagram, Youtube } from "lucide-react";
+import { Flame, TrendingUp, Instagram, Youtube } from "lucide-react";
 import { SiTiktok, SiGoogle } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -8,7 +8,6 @@ interface TrendData {
   icon: "instagram" | "tiktok" | "x" | "youtube" | "google";
   hot: string;
   rising: string;
-  cold: string;
 }
 
 const trendsData: TrendData[] = [
@@ -17,35 +16,30 @@ const trendsData: TrendData[] = [
     icon: "instagram",
     hot: "Amino Acids for Skin Barrier Repair",
     rising: "The Ordinary Amino Acids Serum Reviews",
-    cold: "Amino Acids vs Hyaluronic Acid Debate",
   },
   {
     source: "TikTok",
     icon: "tiktok",
     hot: "Building Blocks of Skin Health Explained",
     rising: "Best Amino Acid Serums for Hydration",
-    cold: "Amino Acids Before & After Results",
   },
   {
     source: "X",
     icon: "x",
     hot: "New Amino Acid Skincare Research",
     rising: "EAA vs BCAA for Skin Health",
-    cold: "Amino Acids and Collagen Production",
   },
   {
     source: "YouTube",
     icon: "youtube",
     hot: "Dermatologist Explains Amino Acids in Skincare",
     rising: "How Amino Acids Improve Skin Texture",
-    cold: "Best Amino Acid Supplements for Skin",
   },
   {
     source: "Google",
     icon: "google",
     hot: "What do amino acids do for skin",
     rising: "Best amino acid serum for face",
-    cold: "Amino acids for anti aging benefits",
   },
 ];
 
@@ -94,14 +88,6 @@ export const TrendsTable = () => {
                     </span>
                   </div>
                 </th>
-                <th className="px-6 py-4 text-left">
-                  <div className="flex items-center gap-2">
-                    <Snowflake className="h-4 w-4 text-cold-trend" />
-                    <span className="text-sm font-semibold text-cold-trend uppercase tracking-wider">
-                      COLD
-                    </span>
-                  </div>
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -127,9 +113,6 @@ export const TrendsTable = () => {
                     </td>
                     <td className="px-6 py-4">
                       <span className="text-foreground">{trend.rising}</span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className="text-foreground">{trend.cold}</span>
                     </td>
                   </tr>
                 );
