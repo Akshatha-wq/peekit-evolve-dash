@@ -12,7 +12,8 @@ import { InfluencerEngagement } from "@/components/sentiment/InfluencerEngagemen
 import { PredictiveNPS } from "@/components/sentiment/PredictiveNPS";
 import { OverallSummary } from "@/components/OverallSummary";
 import { SectionFeedback } from "@/components/SectionFeedback";
-import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb } from "lucide-react";
+import { CompetitorPriceMonitoring } from "@/components/CompetitorPriceMonitoring";
+import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb, DollarSign } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -24,7 +25,7 @@ const Dashboard = () => {
       
       <main className="container mx-auto px-6 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6 bg-muted/50 p-1.5 rounded-xl">
+          <TabsList className="grid w-full grid-cols-7 bg-muted/50 p-1.5 rounded-xl">
             <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <TrendingUp className="h-4 w-4" />
               <span className="hidden sm:inline">Overview & Trends</span>
@@ -49,6 +50,11 @@ const Dashboard = () => {
               <Users className="h-4 w-4" />
               <span className="hidden sm:inline">Engagement</span>
               <span className="sm:hidden">Engage</span>
+            </TabsTrigger>
+            <TabsTrigger value="competitor" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <DollarSign className="h-4 w-4" />
+              <span className="hidden sm:inline">Competitor Price</span>
+              <span className="sm:hidden">Price</span>
             </TabsTrigger>
             <TabsTrigger value="predictive" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <BarChart3 className="h-4 w-4" />
@@ -221,7 +227,23 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 6: Predictive NPS */}
+          {/* Tab 6: Competitor Price Monitoring */}
+          <TabsContent value="competitor" className="space-y-8 animate-fade-in">
+            <section id="competitor-price-monitoring" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <DollarSign className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Competitor Price Monitoring
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Competitor Price Monitoring" />
+              </div>
+              <CompetitorPriceMonitoring />
+            </section>
+          </TabsContent>
+
+          {/* Tab 7: Predictive NPS */}
           <TabsContent value="predictive" className="space-y-8 animate-fade-in">
             <section id="predictive-engagement-nps" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
