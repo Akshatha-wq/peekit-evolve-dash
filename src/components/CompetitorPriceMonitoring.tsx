@@ -7,9 +7,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 // Mock data for competitors
 const competitorMetrics = [
   { label: "Competitors Tracked", value: "12", icon: Eye, change: "+2 this week" },
-  { label: "Daily Updates", value: "47", icon: Calendar, change: "Last 24 hours" },
   { label: "Avg Price Change", value: "-3.2%", icon: TrendingDown, change: "↓ vs last week", positive: true },
-  { label: "Critical Alerts", value: "3", icon: AlertCircle, change: "Requires attention", critical: true },
 ];
 
 const competitorInfluencers = [
@@ -140,19 +138,19 @@ export const CompetitorPriceMonitoring = () => {
   return (
     <div className="space-y-6">
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {competitorMetrics.map((metric, index) => (
           <Card key={index} className="bg-card/50 border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{metric.label}</p>
-                  <p className={`text-2xl font-bold mt-1 ${metric.positive ? 'text-green-500' : metric.critical ? 'text-destructive' : ''}`}>
+                  <p className={`text-2xl font-bold mt-1 ${metric.positive ? 'text-green-500' : ''}`}>
                     {metric.value}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">{metric.change}</p>
                 </div>
-                <metric.icon className={`h-8 w-8 ${metric.positive ? 'text-green-500' : metric.critical ? 'text-destructive' : 'text-muted-foreground'}`} />
+                <metric.icon className={`h-8 w-8 ${metric.positive ? 'text-green-500' : 'text-muted-foreground'}`} />
               </div>
             </CardContent>
           </Card>
