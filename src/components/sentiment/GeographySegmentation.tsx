@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { MapPin, Hash, Users, TrendingUp, TrendingDown } from "lucide-react";
+import { MapPin, Hash, Users, TrendingUp } from "lucide-react";
 
 const allRegionalSentimentData = [
   { region: "Maharashtra", sentimentScore: 8.2, volume: 2845 },
@@ -39,7 +39,7 @@ const regionalConversionOpportunity = [
   { region: "West Bengal", positiveSentiment: 65, transactionRate: 28 },
 ];
 
-const hotspotCount = 5;
+
 
 export const GeographySegmentation = () => {
   return (
@@ -179,7 +179,7 @@ export const GeographySegmentation = () => {
         </Card>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         {/* Customer-Type Breakdown */}
         <Card className="bg-card/50 border-border/50 p-6">
           <div className="flex items-center gap-2 mb-4">
@@ -246,21 +246,6 @@ export const GeographySegmentation = () => {
               </div>
             ))}
           </div>
-        </Card>
-
-        {/* Hotspot Count */}
-        <Card className="bg-card/50 border-border/50 p-6">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingDown className="h-5 w-5 text-warning" />
-            <h4 className="font-semibold text-foreground">Sentiment Hotspots</h4>
-          </div>
-          <div className="flex items-baseline gap-2 mt-4">
-            <span className="text-4xl font-bold text-warning">{hotspotCount}</span>
-            <span className="text-sm text-muted-foreground">regions</span>
-          </div>
-          <p className="text-xs text-muted-foreground mt-2">
-            Showing &gt;20% sentiment change MoM
-          </p>
         </Card>
       </div>
     </div>
