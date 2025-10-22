@@ -173,6 +173,55 @@ export const WhitespaceOpportunities = () => {
           ))}
         </div>
       </div>
+
+      {/* Key Influencers & Complementary Keywords */}
+      <Card className="bg-card/50 border-border/50 p-6">
+        <h4 className="text-lg font-semibold mb-6 text-foreground">Key Influencers & Complementary Keywords</h4>
+        
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Top Influencers */}
+          <div>
+            <h5 className="text-sm font-semibold mb-4 text-foreground flex items-center gap-2">
+              <span className="text-purple-400">⭐</span> Top Influencers
+            </h5>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="col-span-1 row-span-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 flex items-center justify-center min-h-[160px]">
+                <span className="text-white font-semibold text-lg">@TechGuru</span>
+              </div>
+              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-4 flex items-center justify-center">
+                <span className="text-white font-semibold">@StyleInfluencer</span>
+              </div>
+              <div className="bg-gradient-to-br from-cyan-400 to-cyan-500 rounded-2xl p-4 flex items-center justify-center">
+                <span className="text-white font-semibold">@LifestyleVlogger</span>
+              </div>
+              <div className="col-span-2 bg-gradient-to-br from-green-400 to-green-500 rounded-2xl p-4 flex items-center justify-center">
+                <span className="text-white font-semibold">@BeautyExpert</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Complementary Keywords */}
+          <div>
+            <h5 className="text-sm font-semibold mb-4 text-foreground flex items-center gap-2">
+              <span className="text-blue-400">🎯</span> Complementary Keywords
+            </h5>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="col-span-2 bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl p-6 flex items-center justify-center min-h-[100px]">
+                <span className="text-white font-semibold text-lg">Performance</span>
+              </div>
+              <div className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl p-4 flex items-center justify-center">
+                <span className="text-white font-semibold">Recovery</span>
+              </div>
+              <div className="bg-gradient-to-br from-green-400 to-green-500 rounded-2xl p-4 flex items-center justify-center">
+                <span className="text-white font-semibold">Workout</span>
+              </div>
+              <div className="col-span-2 bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl p-4 flex items-center justify-center">
+                <span className="text-white font-semibold">Muscle Growth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 };
