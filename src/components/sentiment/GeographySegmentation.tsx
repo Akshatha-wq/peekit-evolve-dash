@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { MapPin, Hash, Users, TrendingUp, ChevronLeft } from "lucide-react";
+import { MapPin, Users, TrendingUp, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
 const allRegionalSentimentData = [
@@ -138,7 +138,7 @@ export const GeographySegmentation = () => {
     : regionalSentimentData;
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid gap-6">
         {/* Regional Sentiment Index (RSI) */}
         <Card className="bg-card/50 border-border/50 p-6">
           <div className="flex items-center justify-between mb-4">
@@ -247,63 +247,6 @@ export const GeographySegmentation = () => {
               </p>
             </div>
           )}
-        </Card>
-
-        {/* Volume by Geography */}
-        <Card className="bg-card/50 border-border/50 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Hash className="h-5 w-5 text-accent" />
-              <h4 className="text-lg font-bold text-foreground">Volume by Geography</h4>
-            </div>
-            <div className="text-xs text-muted-foreground">Top 8 Regions</div>
-          </div>
-          <ResponsiveContainer width="100%" height={360}>
-            <BarChart 
-              data={regionalSentimentData}
-              margin={{ top: 10, right: 30, left: 0, bottom: 60 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
-              <XAxis 
-                dataKey="region" 
-                angle={-45} 
-                textAnchor="end" 
-                height={100}
-                interval={0}
-                stroke="hsl(var(--muted-foreground))"
-                tick={{ fontSize: 12 }}
-              />
-              <YAxis 
-                stroke="hsl(var(--muted-foreground))"
-                tick={{ fontSize: 12 }}
-                label={{ value: 'Mentions Volume', angle: -90, position: 'insideLeft', style: { fill: 'hsl(var(--muted-foreground))' } }}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: "hsl(var(--popover))", 
-                  border: "1px solid hsl(var(--border))",
-                  borderRadius: "0.5rem",
-                  color: "hsl(var(--foreground))"
-                }}
-                formatter={(value: number, name: string, props: any) => [
-                  <>
-                    <div className="font-semibold">Volume: {value.toLocaleString()}</div>
-                    <div className="text-xs text-muted-foreground">Score: {props.payload.sentimentScore.toFixed(1)}/10</div>
-                  </>,
-                  ''
-                ]}
-              />
-              <Bar 
-                dataKey="volume" 
-                radius={[4, 4, 0, 0]}
-                maxBarSize={60}
-              >
-                {regionalSentimentData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={getSentimentColor(entry.sentimentScore)} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
         </Card>
       </div>
 
