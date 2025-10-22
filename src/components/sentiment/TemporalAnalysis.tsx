@@ -17,60 +17,7 @@ const sentimentByDay = [
 export const TemporalAnalysis = () => {
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Sentiment by Day */}
-      <Card className="bg-card/50 border-border/50 p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Calendar className="h-5 w-5 text-accent" />
-            <h4 className="text-lg font-bold text-foreground">Sentiment by Day (7-day Cycle)</h4>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <AreaChart data={sentimentByDay}>
-              <defs>
-                <linearGradient id="dayGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} />
-              <XAxis 
-                dataKey="day" 
-                stroke="hsl(var(--muted-foreground))"
-                tick={{ fontSize: 12 }}
-              />
-              <YAxis 
-                domain={[0, 10]} 
-                stroke="hsl(var(--muted-foreground))"
-                tick={{ fontSize: 12 }}
-                label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft', style: { fill: 'hsl(var(--muted-foreground))' } }}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: "hsl(var(--popover))", 
-                  border: "1px solid hsl(var(--border))",
-                  borderRadius: "0.5rem",
-                  color: "hsl(var(--foreground))"
-                }}
-                formatter={(value: number, name: string, props: any) => [
-                  <>
-                    <div className="font-semibold">Sentiment: {value.toFixed(1)}/10</div>
-                    <div className="text-xs text-muted-foreground">Posts: {props.payload.posts.toLocaleString()}</div>
-                  </>,
-                  ''
-                ]}
-              />
-              <Area 
-                type="monotone" 
-                dataKey="sentiment" 
-                stroke="#10B981" 
-                strokeWidth={2}
-                fill="url(#dayGradient)" 
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
-            Mean sentiment across weekly patterns
-          </p>
-        </Card>
+      {/* Temporal analysis content can be added here */}
     </div>
   );
 };
