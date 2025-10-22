@@ -294,7 +294,7 @@ export const GeographySegmentation = () => {
         <Card className="bg-card/50 border-border/50 p-6">
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="h-5 w-5 text-rising-trend" />
-            <h4 className="font-semibold text-foreground">Conversion Opportunities</h4>
+            <h4 className="font-semibold text-foreground">Regional Conversion Opportunity Index</h4>
           </div>
           <div className="space-y-4">
             {regionalConversionOpportunity.map((item, index) => (
