@@ -4,13 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TrendingUp, Users, Heart, MessageCircle, Share2, DollarSign } from "lucide-react";
 
-const keyMetrics = [
-  { label: "Avg Engagement Rate", value: "4.8%", icon: TrendingUp },
-  { label: "Total Influencers", value: "234", icon: Users },
-  { label: "Total Reach", value: "2.3M", icon: Heart },
-  { label: "Avg ROI", value: "3.2x", icon: DollarSign },
-];
-
 const topContent = [
   { 
     title: "BCAA vs EAA - What You Need to Know",
@@ -59,15 +52,6 @@ const brandDiscoveries = [
   }
 ];
 
-const influencerData = [
-  { name: "@TechGuru", followers: 245000, likes: 12340, comments: 890, shares: 567, posts: 8, conversions: 342, cost: 15000 },
-  { name: "@StyleInfluencer", followers: 189000, likes: 9870, comments: 654, shares: 423, posts: 6, conversions: 289, cost: 12000 },
-  { name: "@LifestyleVlogger", followers: 312000, likes: 15600, comments: 1120, shares: 789, posts: 10, conversions: 456, cost: 18000 },
-  { name: "@BeautyExpert", followers: 156000, likes: 8230, comments: 567, shares: 345, posts: 7, conversions: 234, cost: 10000 },
-];
-
-const platforms = ["All Platforms", "Instagram", "YouTube", "Twitter", "TikTok", "LinkedIn"];
-
 const influencersByPlatform = {
   instagram: [
     { name: "@techguru", followers: "234K", engagement: "5.2%", roi: "4.1x" },
@@ -91,33 +75,6 @@ export const InfluencerEngagement = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Platform Selector */}
-      <div className="flex items-center gap-4">
-        <span className="text-sm font-medium text-foreground">Platform:</span>
-        <Select value={selectedPlatform} onValueChange={(value) => setSelectedPlatform(value as keyof typeof influencersByPlatform)}>
-          <SelectTrigger className="w-40 bg-background border-border/50">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent className="bg-popover z-50">
-            <SelectItem value="instagram">Instagram</SelectItem>
-            <SelectItem value="youtube">YouTube</SelectItem>
-            <SelectItem value="tiktok">TikTok</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Key Metrics */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {keyMetrics.map((metric) => (
-          <Card key={metric.label} className="bg-card/50 border-border/50 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <metric.icon className="h-4 w-4 text-primary" />
-              <p className="text-xs text-muted-foreground">{metric.label}</p>
-            </div>
-            <p className="text-2xl font-bold text-foreground">{metric.value}</p>
-          </Card>
-        ))}
-      </div>
 
       {/* Top Content */}
       <Card className="bg-card/50 border-border/50 p-6">
