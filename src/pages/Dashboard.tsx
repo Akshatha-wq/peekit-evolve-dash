@@ -25,7 +25,7 @@ const Dashboard = () => {
       
       <main className="container mx-auto px-6 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 bg-muted/50 p-1.5 rounded-xl">
+          <TabsList className="grid w-full grid-cols-6 bg-muted/50 p-1.5 rounded-xl">
             <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <TrendingUp className="h-4 w-4" />
               <span className="hidden sm:inline">Trend Intelligence</span>
@@ -55,11 +55,6 @@ const Dashboard = () => {
               <DollarSign className="h-4 w-4" />
               <span className="hidden sm:inline">Competitor Price</span>
               <span className="sm:hidden">Price</span>
-            </TabsTrigger>
-            <TabsTrigger value="predictive" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
-              <BarChart3 className="h-4 w-4" />
-              <span className="hidden sm:inline">Predictive NPS</span>
-              <span className="sm:hidden">NPS</span>
             </TabsTrigger>
           </TabsList>
 
@@ -243,21 +238,6 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 7: Predictive NPS */}
-          <TabsContent value="predictive" className="space-y-8 animate-fade-in">
-            <section id="predictive-engagement-nps" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
-                <div className="flex items-center gap-3">
-                  <BarChart3 className="h-6 w-6 text-primary" />
-                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Predictive Engagement & NPS Modeling
-                  </h2>
-                </div>
-                <SectionFeedback sectionName="Predictive Engagement & NPS Modeling" />
-              </div>
-              <PredictiveNPS />
-            </section>
-          </TabsContent>
         </Tabs>
 
         {/* Footer */}
