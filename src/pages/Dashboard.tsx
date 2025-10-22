@@ -26,11 +26,16 @@ const Dashboard = () => {
       
       <main className="container mx-auto px-6 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6 bg-muted/50 p-1.5 rounded-xl">
+          <TabsList className="grid w-full grid-cols-7 bg-muted/50 p-1.5 rounded-xl">
             <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <TrendingUp className="h-4 w-4" />
               <span className="hidden sm:inline">Trend Intelligence</span>
               <span className="sm:hidden">Trends</span>
+            </TabsTrigger>
+            <TabsTrigger value="source-mapping" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <MapPin className="h-4 w-4" />
+              <span className="hidden sm:inline">Source Mapping</span>
+              <span className="sm:hidden">Sources</span>
             </TabsTrigger>
             <TabsTrigger value="whitespace" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Target className="h-4 w-4" />
@@ -108,32 +113,6 @@ const Dashboard = () => {
 
             </section>
 
-            <section id="trends-table" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
-                <div className="flex items-center gap-3">
-                  <Flame className="h-6 w-6 text-primary" />
-                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Hot, Rising & Cold Trends
-                  </h2>
-                </div>
-                <SectionFeedback sectionName="Hot, Rising & Cold Trends" />
-              </div>
-              <TrendsTable />
-            </section>
-
-            <section id="source-mapping" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-6 w-6 text-primary" />
-                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Source Mapping
-                  </h2>
-                </div>
-                <SectionFeedback sectionName="Source Mapping" />
-              </div>
-              <SourceMapping />
-            </section>
-
             <section id="overall-summary" className="scroll-mt-24 space-y-6 mt-8">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
                 <div className="flex items-center gap-3">
@@ -148,7 +127,36 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 2: Whitespace Opportunities */}
+          {/* Tab 2: Source Mapping */}
+          <TabsContent value="source-mapping" className="space-y-8 animate-fade-in">
+            <section id="trends-table" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Flame className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Hot, Rising & Cold Trends
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Hot, Rising & Cold Trends" />
+              </div>
+              <TrendsTable />
+            </section>
+
+            <section id="source-mapping" className="scroll-mt-24 space-y-6 mt-8">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Source Mapping
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Source Mapping" />
+              </div>
+              <SourceMapping />
+            </section>
+          </TabsContent>
+
+          {/* Tab 3: Whitespace Opportunities */}
           <TabsContent value="whitespace" className="space-y-8 animate-fade-in">
             <section id="whitespace-opportunities" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
@@ -164,7 +172,7 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 3: Sentiment & Analysis */}
+          {/* Tab 4: Sentiment & Analysis */}
           <TabsContent value="sentiment" className="space-y-8 animate-fade-in">
             <section id="sentiment-breakdown" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
@@ -180,7 +188,7 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 4: Temporal & Geographic */}
+          {/* Tab 5: Temporal & Geographic */}
           <TabsContent value="temporal" className="space-y-8 animate-fade-in">
             <section id="temporal-analysis" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
@@ -209,7 +217,7 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 5: Engagement */}
+          {/* Tab 6: Engagement */}
           <TabsContent value="engagement" className="space-y-8 animate-fade-in">
             <section id="influencer-engagement-analytics" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
@@ -225,7 +233,7 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 6: Competitor Price Monitoring */}
+          {/* Tab 7: Competitor Price Monitoring */}
           <TabsContent value="competitor" className="space-y-8 animate-fade-in">
             <section id="competitor-price-monitoring" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
