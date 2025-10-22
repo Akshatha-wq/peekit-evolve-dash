@@ -28,8 +28,8 @@ const Dashboard = () => {
           <TabsList className="grid w-full grid-cols-7 bg-muted/50 p-1.5 rounded-xl">
             <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <TrendingUp className="h-4 w-4" />
-              <span className="hidden sm:inline">Overview & Trends</span>
-              <span className="sm:hidden">Overview</span>
+              <span className="hidden sm:inline">Trend Intelligence</span>
+              <span className="sm:hidden">Trends</span>
             </TabsTrigger>
             <TabsTrigger value="whitespace" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Target className="h-4 w-4" />
