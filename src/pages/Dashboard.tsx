@@ -49,7 +49,7 @@ const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="temporal" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Globe className="h-4 w-4" />
-              <span className="hidden sm:inline">Temporal & Geo</span>
+              <span className="hidden sm:inline">Geo</span>
               <span className="sm:hidden">Geo</span>
             </TabsTrigger>
             <TabsTrigger value="engagement" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
@@ -188,22 +188,9 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 5: Temporal & Geographic */}
+          {/* Tab 5: Geographic */}
           <TabsContent value="temporal" className="space-y-8 animate-fade-in">
-            <section id="temporal-analysis" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
-                <div className="flex items-center gap-3">
-                  <Clock className="h-6 w-6 text-primary" />
-                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Temporal Analysis
-                  </h2>
-                </div>
-                <SectionFeedback sectionName="Temporal Analysis" />
-              </div>
-              <TemporalAnalysis />
-            </section>
-
-            <section id="geography-customer-segmentation" className="scroll-mt-24 space-y-6 mt-8">
+            <section id="geography-customer-segmentation" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
                 <div className="flex items-center gap-3">
                   <Globe className="h-6 w-6 text-primary" />
