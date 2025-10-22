@@ -54,8 +54,8 @@ const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="engagement" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <Users className="h-4 w-4" />
-              <span className="hidden sm:inline">Engagement</span>
-              <span className="sm:hidden">Engage</span>
+              <span className="hidden sm:inline">Content</span>
+              <span className="sm:hidden">Content</span>
             </TabsTrigger>
             <TabsTrigger value="competitor" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <DollarSign className="h-4 w-4" />
