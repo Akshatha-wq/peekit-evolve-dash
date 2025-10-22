@@ -13,6 +13,7 @@ import { PredictiveNPS } from "@/components/sentiment/PredictiveNPS";
 import { OverallSummary } from "@/components/OverallSummary";
 import { SectionFeedback } from "@/components/SectionFeedback";
 import { CompetitorPriceMonitoring } from "@/components/CompetitorPriceMonitoring";
+import { GrowthTrajectoryChart } from "@/components/GrowthTrajectoryChart";
 import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb, DollarSign } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -94,7 +95,7 @@ const Dashboard = () => {
                   subtitle="Posts"
                   gradient="rising"
                 />
-                <MetricCard
+              <MetricCard
                   icon={Eye}
                   label="Total Reach"
                   value="8.3M"
@@ -102,6 +103,8 @@ const Dashboard = () => {
                   gradient="hot"
                 />
               </div>
+
+              <GrowthTrajectoryChart />
 
             </section>
 
