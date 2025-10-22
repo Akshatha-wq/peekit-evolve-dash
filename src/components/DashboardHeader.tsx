@@ -140,33 +140,6 @@ export const DashboardHeader = () => {
               </SelectContent>
             </Select>
 
-            <Select defaultValue="30days">
-              <SelectTrigger className="w-40 bg-background border-border/50">
-                <Filter className="h-4 w-4 mr-2" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-popover z-50">
-                <SelectItem value="7days">Last 7 Days</SelectItem>
-                <SelectItem value="30days">Last 30 Days</SelectItem>
-                <SelectItem value="90days">Last 90 Days</SelectItem>
-                <SelectItem value="6months">Last 6 Months</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select defaultValue="all">
-              <SelectTrigger className="w-48 bg-background border-border/50">
-                <span className="text-sm font-medium mr-2">Sources:</span>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-popover z-50">
-                <SelectItem value="all">All Platforms</SelectItem>
-                <SelectItem value="instagram">Instagram</SelectItem>
-                <SelectItem value="youtube">YouTube</SelectItem>
-                <SelectItem value="twitter">Twitter/X</SelectItem>
-                <SelectItem value="tiktok">TikTok</SelectItem>
-              </SelectContent>
-            </Select>
-
             <Button
               onClick={() => toast({ 
                 title: "Coming Soon", 
