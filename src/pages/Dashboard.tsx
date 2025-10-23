@@ -52,15 +52,15 @@ const Dashboard = () => {
               <span className="hidden sm:inline">Geo</span>
               <span className="sm:hidden">Geo</span>
             </TabsTrigger>
-            <TabsTrigger value="engagement" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
-              <Users className="h-4 w-4" />
-              <span className="hidden sm:inline">Content</span>
-              <span className="sm:hidden">Content</span>
-            </TabsTrigger>
             <TabsTrigger value="competitor" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
               <DollarSign className="h-4 w-4" />
               <span className="hidden sm:inline">Competitor Price</span>
               <span className="sm:hidden">Price</span>
+            </TabsTrigger>
+            <TabsTrigger value="engagement" className="flex items-center gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-primary-foreground">
+              <Users className="h-4 w-4" />
+              <span className="hidden sm:inline">Content</span>
+              <span className="sm:hidden">Content</span>
             </TabsTrigger>
           </TabsList>
 
@@ -204,23 +204,7 @@ const Dashboard = () => {
             </section>
           </TabsContent>
 
-          {/* Tab 6: Engagement */}
-          <TabsContent value="engagement" className="space-y-8 animate-fade-in">
-            <section id="influencer-engagement-analytics" className="scroll-mt-24 space-y-6">
-              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
-                <div className="flex items-center gap-3">
-                  <Users className="h-6 w-6 text-primary" />
-                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                    Influencer & Engagement Analytics
-                  </h2>
-                </div>
-                <SectionFeedback sectionName="Influencer & Engagement Analytics" />
-              </div>
-              <InfluencerEngagement />
-            </section>
-          </TabsContent>
-
-          {/* Tab 7: Competitor Price Monitoring */}
+          {/* Tab 6: Competitor Price Monitoring */}
           <TabsContent value="competitor" className="space-y-8 animate-fade-in">
             <section id="competitor-price-monitoring" className="scroll-mt-24 space-y-6">
               <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
@@ -233,6 +217,22 @@ const Dashboard = () => {
                 <SectionFeedback sectionName="Competitor Price Monitoring" />
               </div>
               <CompetitorPriceMonitoring />
+            </section>
+          </TabsContent>
+
+          {/* Tab 7: Content */}
+          <TabsContent value="engagement" className="space-y-8 animate-fade-in">
+            <section id="influencer-engagement-analytics" className="scroll-mt-24 space-y-6">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Users className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Influencer & Engagement Analytics
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Influencer & Engagement Analytics" />
+              </div>
+              <InfluencerEngagement />
             </section>
           </TabsContent>
 
