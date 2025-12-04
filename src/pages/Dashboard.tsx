@@ -10,10 +10,11 @@ import { TemporalAnalysis } from "@/components/sentiment/TemporalAnalysis";
 import { GeographySegmentation } from "@/components/sentiment/GeographySegmentation";
 import { InfluencerEngagement } from "@/components/sentiment/InfluencerEngagement";
 import { PredictiveNPS } from "@/components/sentiment/PredictiveNPS";
+import { CompetitorContentAnalysis } from "@/components/CompetitorContentAnalysis";
 import { OverallSummary } from "@/components/OverallSummary";
 import { SectionFeedback } from "@/components/SectionFeedback";
 import { GrowthTrajectoryChart } from "@/components/GrowthTrajectoryChart";
-import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb } from "lucide-react";
+import { Database, Calendar, FileText, Eye, Sparkles, TrendingUp, Flame, MapPin, Target, Globe, Clock, Users, BarChart3, Lightbulb, Video } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -211,6 +212,19 @@ const Dashboard = () => {
                 <SectionFeedback sectionName="Influencer & Engagement Analytics" />
               </div>
               <InfluencerEngagement />
+            </section>
+
+            <section id="competitor-content-analysis" className="scroll-mt-24 space-y-6 mt-8">
+              <div className="flex items-center justify-between gap-3 pb-3 border-b-2 border-primary/20">
+                <div className="flex items-center gap-3">
+                  <Video className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                    Competitor Content Analysis
+                  </h2>
+                </div>
+                <SectionFeedback sectionName="Competitor Content Analysis" />
+              </div>
+              <CompetitorContentAnalysis />
             </section>
           </TabsContent>
 
